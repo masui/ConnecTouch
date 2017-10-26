@@ -1,4 +1,4 @@
-<!-- aaaaa -->
+<!-- -*- html -*-  -->
 
 <h1>ConnecTouch</h1>
 
