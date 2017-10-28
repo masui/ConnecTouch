@@ -3,29 +3,17 @@
 #
 # ConnecTouch
 #
+# % mongo
+# > use connectouch
+# > db.createCollection('link')
+# > db.link.find()
 
 require 'sinatra'
-
-#require 'sinatra/base'
-#require 'sinatra/reloader'
-
 require 'mongo'
-
 require 'json'
 
 connection = Mongo::Connection.new('localhost', 27017)
 db = connection.db('connectouch')
-
-
-#class App < Sinatra::Base
-#  configure :development do
-#    register Sinatra::Reloader
-#  end
-#  configure :production do
-#    register Sinatra::Reloader
-#  end
-#end
-#App.run!
 
 get '/read/:id' do |id|
   data = db['node'].find_one(:id => id)
@@ -60,8 +48,48 @@ get '/write' do # /write/abc?id=abc&url=xyz, etc.
   data.to_json
 end
 
-get '/:id' do |id|
-  "abcdefg"
+get '/nodes' do
+  db['node'].find().to_a.to_json
+end
+
+get '/addlink/:id1/:id2' do |id1,id2|
+  data = {}
+  data['time'] = Time.now.to_i
+  data['link'] = [id1, id2]
+  db['link'].insert(data)
+  data.to_json
+end
+
+get '/addlink' do
+  id1 = params['id1']
+  id2 = params['id2']
+  data = {}
+  if id1 && id2 then
+    data['time'] = Time.now.to_i
+    data['link'] = [id1, id2]
+    db['link'].insert(data)
+  end
+  data.to_json
+end
+
+get '/removelink/:id1/:id2' do |id1,id2|
+  db['link'].remove(:link => [id1, id2])
+  db['link'].remove(:link => [id2, id1])
+  'true'
+end
+
+get '/removelink' do
+  id1 = params['id1']
+  id2 = params['id2']
+  if id1 && id2 then
+    db['link'].remove(:ids => [id1, id2])
+    db['link'].remove(:ids => [id2, id1])
+  end
+  'true'
+end
+
+get '/links' do
+  db['link'].find().to_a.to_json
 end
 
 get '/' do
@@ -69,5 +97,5 @@ get '/' do
 end
 
 error do
-  "Y U NO WORK?"
+  "Error!"
 end
