@@ -1,5 +1,8 @@
 ■ URLを記録するChrome拡張機能とCGI
 
+* RememberURL はRFIDとかと特に関係がない
+  Web閲覧履歴を記録するだけ
+
 * Webアクセスをローカルに記録する ~/Sites/rememberurl.cgi を拡張機能から呼ぶ
   chmod +x すること
   

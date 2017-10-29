@@ -1,3 +1,8 @@
 ■ NFCカードリーダプロセス
 
-reader.py がメイン
+ * reader.py がメイン
+   make で起動
+
+ * mac.py, mac.rb でMACアドレスを取得
+
+ * test.py でマシンとカードのIDを確認
