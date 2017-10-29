@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+#
+# リーダとカードのIDを表示
+#
 
 import nfc
 import binascii
