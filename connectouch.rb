@@ -55,6 +55,7 @@ end
 get '/addlink/:id1/:id2' do |id1,id2|
   data = {}
   data['time'] = Time.now.to_i
+  data['url'] = params[:url]
   data['link'] = [id1, id2]
   db['link'].insert(data)
   data.to_json
@@ -66,6 +67,7 @@ get '/addlink' do
   data = {}
   if id1 && id2 then
     data['time'] = Time.now.to_i
+    data['url'] = params[:url]
     data['link'] = [id1, id2]
     db['link'].insert(data)
   end
@@ -91,6 +93,8 @@ end
 get '/links' do
   db['link'].find().to_a.to_json
 end
+
+
 
 get '/' do
   "Hello!"
