@@ -1,0 +1,13 @@
+{
+    "name": "RememberURL",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "アクセスしたURLを記憶",
+    "content_scripts": [
+	{
+	    "matches": ["https://*/*", "http://*/*"],
+	    "js": ["jquery-2.1.4.min.js", "rememberurl.js"],
+	    "run_at": "document_idle"
+	}
+    ]
+}

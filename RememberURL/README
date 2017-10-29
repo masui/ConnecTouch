@@ -1,0 +1,10 @@
+■ URLを記録するChrome拡張機能とCGI
+
+* Webアクセスをローカルに記録する ~/Sites/rememberurl.cgi を拡張機能から呼ぶ
+  chmod +x すること
+  
+* 本ディレクトリをChromeで拡張機能登録登録
+  manifest.json と rememberurl.js
+
+★ HTTPSなサイトからrememberurl.cgiを呼べない
+   rememberurl.cgiもHTTPSなサイトに置く必要ありそう

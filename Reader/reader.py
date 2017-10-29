@@ -2,6 +2,8 @@
 #
 # NFCを認識したらConnecTouch.orgにリクエストを送出
 #
+# パソコンの場合はパソコンの利用履歴URLも送出
+#
 
 import nfc
 import binascii
@@ -11,6 +13,13 @@ from uuid import getnode as get_mac
 
 readerId = "%012x" % get_mac() # リーダに接続されたマシンのMACアドレス(48ビット整数)のHex値
 
+def lasturl():
+    LOGFILE = '/Users/masui/Sites/rememberurl.log'
+    loglines = open(LOGFILE).read().split('\n')
+    lastline = loglines[len(loglines)-2]
+    [time, url] = lastline.split('\t')
+    return url
+
 def startup(targets):
     print 'waiting for NFC tag ...'
     return targets
@@ -19,8 +28,12 @@ def connected(tag):
     nfcId = binascii.hexlify(tag.identifier)
     date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     print("|%s| readerId: %s nfcId: %s" % (date, readerId, nfcId))
+    
+    if readerId == "a45e60e40c05": # 増井のパソコンの場合URLも通知
+        request = "http://connectouch.org/addlink/%s/%s?url=%s" % (readerId, nfcId, lasturl())
+    else:
+        request = "http://connectouch.org/addlink/%s/%s" % (readerId, nfcId)
 
-    request = "http://connectouch.org/addlink/%s/%s" % (readerId, nfcId)
     try:
         res = requests.get(request)
         print(res.text)
