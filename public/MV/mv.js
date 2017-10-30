@@ -43,7 +43,10 @@ var states = [
 ];
 
 function transfunc(s, f){
-    return function(){ trans(s); f(); };
+    return function(){
+	trans(s);
+	if(f) f();
+    };
 }
 
 function trans(s){ // sに遷移
