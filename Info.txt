@@ -1,16 +1,12 @@
 ■ MACアドレス
 
  増井 MacBookPro  a45e60e40c05
- デルタ MacBook   0023dfdfe588
+ デルタ MacPro    0023dfdfe588
+ 早川 MacBookAir  f45c89bfd495
 
 ■ NFCカードID
 
- 増井Suica     0110041085168d11
- 増井鍵カード  01147302560fd305
- 早川Suica     011401147f10c10a
- 早川学生証    0114b34d2414b148
-
-■ リーダ
-
-リーダ1 (USB2-NFC)
-
+ 増井Suica      0110041085168d11
+ 増井SFCカード  01147302560fd305
+ 早川Suica      011401147f10c10a
+ 早川学生証     0114b34d2414b148
