@@ -1,6 +1,9 @@
 //
-// 券売機シミュレータ
+// サイネージシミュレータ
 //
+
+var div1, div2, div3;
+var iframe;
 
 var button11 = { left:   0, top:  10, width: 400, height: 140 };
 var button12 = { left: 400, top:  10, width: 400, height: 140 };
@@ -77,8 +80,8 @@ function readLinks(){
 	if (status == 'success') {
             firstdata = data[0];
 	    lastdata = data[data.length-1];
-	    // var date_obj = new Date(lastdata.time * 1000);
-	    // alert(date_obj.toString());
+	     var date_obj = new Date(lastdata.time * 1000);
+	     alert(date_obj.toString());
 	}
     });
 }
@@ -86,5 +89,44 @@ function readLinks(){
 $(function() {
     readLinks();
     // ユーザを調べ、それに応じて状態遷移を変える
-    trans('トップ');
+    div1 = $('<div>');
+    div1.css('background-color','yellow').
+	css('float','left').
+	css('width',300).
+	css('height',100).
+	css('margin',10).
+	text('DIV1');
+    $('body').append(div1);
+    
+    div2 = $('<div>');
+    div2.css('background-color','yellow').
+	css('float','left').
+	css('width',300).
+	css('height',100).
+	css('margin',10).
+	text('DIV2');
+    $('body').append(div2);
+    
+    div3 = $('<div>');
+    div3.css('background-color','yellow').
+	css('float','left').
+	css('width',300).
+	css('height',100).
+	css('margin',10).
+	text('DIV3');
+    $('body').append(div3);
+
+    $('body').append($('<p>'));
+    
+    iframe = $('<iframe>');
+    iframe.attr('marginwidth',0);
+    iframe.attr('src','http://www.ryokusuitei.co.jp/');
+    iframe.css('margin',0).
+	css('padding',0).
+	css('width','100%').
+	css('height','90%').
+	css('border','none');
+    $('body').append(iframe);
+    
+    // trans('トップ');
 });
