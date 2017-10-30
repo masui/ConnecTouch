@@ -19,14 +19,16 @@ states['トップ'] = {
     image: 'https://gyazo.com/2069fefaec99bff27e6fde58f90bcd7e.png',
     buttons: [
 	[button11, '指定席選択'],
-	[button12, '指定席選択', function(){ alert('指定席選択'); }]
+	[button12, '指定席選択',
+	 function(){ return '指定席選択'; } // 状況によって飛び先を変える!
+	]
     ]
 };
 states['指定席選択'] = {
     image: 'https://gyazo.com/3a1f7bd4053a1989b9d32e1f2b8ce30e.png',
     buttons: [
 	[button21, '新幹線指定席選択'],
-	[button22, 'トップ', function(){ alert('トップに戻る'); }]
+	[button22, 'トップ', function(){ return 'トップ'; }]
     ]
 };
 states['新幹線指定席選択'] = {
@@ -34,14 +36,16 @@ states['新幹線指定席選択'] = {
     buttons: [
 	[button31, 'トップ'],
 	[button32, 'トップ'],
-	[button33, 'トップ', function(){ alert('トップに戻る'); }]
+	[button33, 'トップ', function(){ return '指定席選択'; }]
     ]
 };
 
-function transfunc(s, f){
+function transfunc(s, destfunc){
     return function(){
-	trans(s);
-	if(f) f();
+	var dest;
+	dest = s;
+	if(destfunc) dest = destfunc();
+	trans(dest);
     };
 }
 
@@ -61,7 +65,7 @@ function trans(name){ // stateに遷移
 		css('left',button.left).
 		css('width',button.width).
 		css('height',button.height).
-		css('opacity',0.5);
+		css('opacity',0.3);
 	div.on('click',transfunc(state.buttons[j][1], state.buttons[j][2]));
 	$('body').append(div);
     }
@@ -69,5 +73,4 @@ function trans(name){ // stateに遷移
 
 $(function() {
     trans('トップ');
-    // $('#otoku').on('click',function(){ alert(100); });
 });
