@@ -26,5 +26,8 @@ Suicaを使って各種の情報共有/コミュニケーションする実験
   <li>興味ある情報にアクセスしやすくなったりする</li>
   <li><code>Reader</code>: RFIDリーダを読むPythonプログラム</li>
   <li><code>RememberURL</code>: パソコンで見たURLを登録する拡張機能とサーバのCGI</li>
+  <ul>
+    <li>同じとこに置いてしまってますが</li>
+  </ul>
 </ul>
 
