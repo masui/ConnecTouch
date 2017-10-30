@@ -9,8 +9,11 @@
 # > db.link.find()
 
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'mongo'
 require 'json'
+
+enable :cross_origin
 
 connection = Mongo::Connection.new('localhost', 27017)
 db = connection.db('connectouch')
