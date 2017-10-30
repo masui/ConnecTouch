@@ -27,7 +27,14 @@ Suicaを使って各種の情報共有/コミュニケーションする実験
   <li><code>Reader</code>: RFIDリーダを読むPythonプログラム</li>
   <li><code>RememberURL</code>: パソコンで見たURLを登録する拡張機能とサーバのCGI</li>
   <ul>
-    <li>同じとこに置いてしまってますが</li>
+    <li>同じとこに置いているが実行環境は別</li>
   </ul>
 </ul>
+
+<h2>API</h2>
+
+<ul>
+<li><a href="http://ConnecTouch.org/links">リンクのリスト</a></li>
+
+
 
