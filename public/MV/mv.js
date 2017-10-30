@@ -1,61 +1,49 @@
 //
-// setdisp(image, [buttons])
-// button = 
+// 券売機シミュレータ
 //
 
-// trans(3) 状態3に移動
+var button11 = { left:   0, top:  10, width: 400, height: 140 };
+var button12 = { left: 400, top:  10, width: 400, height: 140 };
+var button13 = { left:   0, top: 150, width: 400, height: 140 };
+var button14 = { left: 400, top: 150, width: 400, height: 140 };
 
-//
-// button1 == {
-//   image: 'http://....', <= 透明かも
-//   pos: [10, 20],
-//   size: [100, 100]
-//   
-// }
-// state1 = {
-//   name: 'state1',
-//   image: 'http://....',
-//   buttons: [
-//     [button1, 'state2'],
-//     [button2, 'state3', function(){ ... }]
-//   ],
-// }
-//
+var button21 = { left:   0, top:  85, width: 400, height:  90 };
+var button22 = { left: 400, top:  85, width: 400, height:  90 };
 
-var button1 = {
-    left: 400,
-    top: 150,
-    width: 400,
-    height: 140
-};
-var button2 = {
-    left: 0,
-    top: 150,
-    width: 400,
-    height: 140
-};
+var button31 = { left:  20, top:  50, width: 250, height:  90 };
+var button32 = { left: 275, top:  50, width: 250, height:  90 };
+var button33 = { left: 530, top:  50, width: 250, height:  90 };
 
 var states = [
     {
 	name: 'トップ',
 	image: 'https://gyazo.com/2069fefaec99bff27e6fde58f90bcd7e.png',
 	buttons: [
-	    [button1, '指定席'],
-	    [button2, '指定席', function(){ alert(100); }]
+	    [button11, '指定席選択'],
+	    [button12, '指定席選択', function(){ alert('指定席選択'); }]
 	]
     },
     {
-	name: '指定席',
+	name: '指定席選択',
 	image: 'https://gyazo.com/3a1f7bd4053a1989b9d32e1f2b8ce30e.png',
 	buttons: [
-	    [button1, 'トップ'],
-	    [button2, 'トップ', function(){ alert(200); }]
+	    [button21, '新幹線指定席選択'],
+	    [button22, 'トップ', function(){ alert('トップに戻る'); }]
+	]
+    },
+    {
+	name: '新幹線指定席選択',
+	image: 'https://gyazo.com/b6a4379be160f099e8ce568a03f67793.png',
+	buttons: [
+	    [button31, 'トップ'],
+	    [button32, 'トップ'],
+	    [button33, 'トップ', function(){ alert('トップに戻る'); }]
 	]
     }
 ];
 
-function transfunc(s){
-    return function(){ trans(s); };
+function transfunc(s, f){
+    return function(){ trans(s); f(); };
 }
 
 function trans(s){ // sに遷移
@@ -77,7 +65,7 @@ function trans(s){ // sに遷移
 			css('width',button.width).
 			css('height',button.height).
 			css('opacity',0.5);
-		div.on('click',transfunc(state.buttons[j][1]));
+		div.on('click',transfunc(state.buttons[j][1], state.buttons[j][2]));
 		$('body').append(div);
 	    }
 	    break;
