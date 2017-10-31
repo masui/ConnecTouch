@@ -2,17 +2,17 @@
 // 券売機シミュレータ
 //
 
-var button11 = { left:   '20%', top:  '20%', width: 40, height: 140 };
-var button12 = { left: 400, top:  10, width: 400, height: 140 };
-var button13 = { left:   0, top: 150, width: 400, height: 140 };
-var button14 = { left: 400, top: 150, width: 400, height: 140 };
+var button11 = { left:  '1%', top:  '2%', width: '48%', height: '25%' };
+var button12 = { left: '50%', top:  '2%', width: '48%', height: '25%' };
+var button13 = { left:  '1%', top: '28%', width: '48%', height: '25%' };
+var button14 = { left: '50%', top: '28%', width: '48%', height: '25%' };
 
-var button21 = { left:   0, top:  85, width: 400, height:  90 };
-var button22 = { left: 400, top:  85, width: 400, height:  90 };
+var button21 = { left:  '1%', top: '16%', width: '47%', height: '16%' };
+var button22 = { left: '51%', top: '16%', width: '47%', height: '16%' };
 
-var button31 = { left:  20, top:  50, width: 250, height:  90 };
-var button32 = { left: 275, top:  50, width: 250, height:  90 };
-var button33 = { left: 530, top:  50, width: 250, height:  90 };
+var button31 = { left:  '1%', top:  '9%', width: '31%', height: '14%' };
+var button32 = { left: '33%', top:  '9%', width: '31%', height: '14%' };
+var button33 = { left: '65%', top:  '9%', width: '31%', height: '14%' };
 
 var states = {};
 states['トップ'] = {
