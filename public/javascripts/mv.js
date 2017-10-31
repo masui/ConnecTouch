@@ -55,6 +55,48 @@ var states = {
 	    トップに戻る:   { 座標: 全面戻るボタン,   遷移: () => 'トップ' }
 	}
     }
+};
+
+//
+// ユーザを調べ、それに応じて状態遷移を変える
+//
+function update(){
+    var 券売機 = 鎌倉券売機;
+
+    // 券売機関連のリンクを取得
+    var 鎌倉券売機リスト = readLinks(券売機);
+
+    //
+    // 最も最近タッチされたカードのIDを取得
+    // e.g. 増井Suica
+    //
+    var touched_nfc = nfc_id(鎌倉券売機リスト[0]);
+
+    //
+    // 利用履歴取得
+    // 最近の趣味がわかるハズ
+    //
+    var nfc利用履歴リスト = readLinks(touched_nfc);
+    
+    var done = false;
+    nfc利用履歴リスト.forEach(function(利用履歴){
+	var target = reader_id(利用履歴);
+	//
+	// targetごとにいろんな処理!
+	//
+	if(target == 緑水亭ポスタ && ! done){
+	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => '仙台まるごとパス';
+	    done = true;
+	}
+	if(target == 秋葉原サイネージ && ! done){
+	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
+	    done = true;
+	}
+	if(target == 湘南台サイネージ && ! done){
+	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
+	    done = true;
+	}
+    });
 }
 
 function transfunc(destfunc){
@@ -64,6 +106,9 @@ function transfunc(destfunc){
 }
 
 function trans(name){ // stateに遷移
+    if(name == 'トップ') update();
+
+    
     $('body').empty();
     $('body').css('margin',0);
     var state = states[name];
@@ -125,46 +170,5 @@ function reader_id(entry){
 }
 
 $(function() {
-    var 券売機 = 鎌倉券売機
-
-    // 券売機関連のリンクを取得
-    var 鎌倉券売機リスト = readLinks(券売機);
-    
-    //
-    // ユーザを調べ、それに応じて状態遷移を変える
-    //
-
-    //
-    // 最も最近タッチされたカードのIDを取得
-    //
-    var touched_nfc = nfc_id(鎌倉券売機リスト[0]);
-
-    //
-    // 利用履歴取得
-    // 最近の趣味がわかるハズ
-    //
-    var nfc利用履歴リスト = readLinks(touched_nfc);
-    
-    var done = false;
-    nfc利用履歴リスト.forEach(function(利用履歴){
-	var target = reader_id(利用履歴);
-	//
-	// targetごとにいろんな処理!
-	//
-	if(target == 緑水亭ポスタ && ! done){
-	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => '仙台まるごとパス';
-	    done = true;
-	}
-	if(target == 秋葉原サイネージ && ! done){
-	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
-	    done = true;
-	}
-	if(target == 湘南台サイネージ && ! done){
-	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
-	    done = true;
-	}
-    });
-    
     trans('トップ');
-    
 });
