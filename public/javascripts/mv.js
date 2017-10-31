@@ -72,20 +72,24 @@ function trans(name){ // stateに遷移
     }
 };
 
-function readLinks(){
-    const linksURL = 'http://connectouch.org/links'; // ConnecTouch API
-    $.getJSON(linksURL, null, function(data, status){
+function readLinks(id){
+    var api = 'http://connectouch.org/links';
+    if(id) api = `${api}?id=${id}`;
+    $.getJSON(api, null, function(data, status){
 	if (status == 'success') {
-            firstdata = data[0];
-	    lastdata = data[data.length-1];
-	    // var date_obj = new Date(lastdata.time * 1000);
-	    // alert(date_obj.toString());
+	    if(data.length > 0){
+		firstdata = data[0];
+		lastdata = data[data.length-1];
+		var date_obj = new Date(firstdata.time * 1000);
+		alert(date_obj.toString());
+	    }
 	}
     });
 }
 
 $(function() {
-    readLinks();
+    readLinks(鎌倉券売機);
     // ユーザを調べ、それに応じて状態遷移を変える
+    // 時刻が近い場合のみ
     trans('トップ');
 });
