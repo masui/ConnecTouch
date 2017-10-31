@@ -13,7 +13,7 @@
 //  早川Suica      011401147f10c10a
 //  早川学生証     0114b34d2414b148
 //  佐竹学生証     0114b34d0316e228
-//  及川SFCカード  ???????
+//  及川SFCカード  0114c302c014bf0f
 //
 
 const 秋葉原サイネージ = '0023dfdfe588'; // Delta MacPro
@@ -25,13 +25,12 @@ const 鎌倉券売機 =       'b827ebc26e60'; // SatakePi
 const 増井SFCカード =    '01147302560fd305';
 const 佐竹学生証 =       '0114b34d0316e228';
 const 早川学生証 =       '0114b34d2414b148';
-const 及川SFCカード =    '????????????????';
+const 及川SFCカード =    '0114c302c014bf0f';
 
-function is_mac(id){
+function is_mac(id){ // IDがMACアドレスかどうか
     return id.match(/^[0-9a-f]{12}$/);
 }
-function is_card(id){
+function is_card(id){ // IDがRFIDかどうか
     return !is_mac(id);
 }
 
-// console.log(IDS.秋葉原サイネージ);

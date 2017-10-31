@@ -1,6 +1,8 @@
 //
 // 券売機シミュレータ
 //
+// 2017/10/31 Toshiyuki Masui
+//
 
 var 指定席ボタン   =         { left:  '1%', top:  '2%', width: '48%', height: '25%' };
 var 乗換案内から購入ボタン = { left: '50%', top:  '2%', width: '48%', height: '25%' };
@@ -65,10 +67,16 @@ function trans(name){ // stateに遷移
     $('body').empty();
     $('body').css('margin',0);
     var state = states[name];
+    //
+    // バックグラウンド画像表示
+    //
     var image = $('<img>');
     image.attr('src',state.画像);
     image.css('width','100%');
     $('body').append(image);
+    //
+    // ボタン表示、遷移定義
+    //
     for (buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
 	var div = $('<div>').
@@ -136,15 +144,10 @@ $(function() {
     // 最近の趣味がわかるハズ
     //
     var nfc利用履歴リスト = readLinks(touched_nfc);
+    
     var done = false;
     nfc利用履歴リスト.forEach(function(利用履歴){
-	/*
-	var link = 利用履歴.link;
-	var target = link[0];
-	if(target == nfcid) target = link[1];
-	*/
 	var target = reader_id(利用履歴);
-
 	//
 	// targetごとにいろんな処理!
 	//
