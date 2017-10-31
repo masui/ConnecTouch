@@ -27,4 +27,11 @@ const 佐竹学生証 =       '0114b34d0316e228';
 const 早川学生証 =       '0114b34d2414b148';
 const 及川SFCカード =    '????????????????';
 
+function is_mac(id){
+    return id.match(/^[0-9a-f]{12}$/);
+}
+function is_card(id){
+    return !is_mac(id);
+}
+
 // console.log(IDS.秋葉原サイネージ);
