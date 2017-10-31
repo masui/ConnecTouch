@@ -14,8 +14,7 @@ var button31 = { left:  '1%', top:  '9%', width: '31%', height: '14%' };
 var button32 = { left: '33%', top:  '9%', width: '31%', height: '14%' };
 var button33 = { left: '65%', top:  '9%', width: '31%', height: '14%' };
 
-//var states = {};
-//states['トップ'] = {
+var 全面戻るボタン = { left: '0%', top:  '0%', width: '100%', height: '100%' };
 
 var states = {
     トップ: {
@@ -24,7 +23,7 @@ var states = {
 	    指定席:           { 座標: 指定席ボタン,           遷移: () => '指定席選択' },
 	    乗換案内から購入: { 座標: 乗換案内から購入ボタン, 遷移: () => '指定席選択' },
 	    自由席:           { 座標: 自由席ボタン,           遷移: () => '指定席選択' },
-	    おトクなきっぷ:   { 座標: おトクなきっぷボタン,   遷移: () => '指定席選択' }
+	    おトクなきっぷ:   { 座標: おトクなきっぷボタン,   遷移: () => 'あおもりホリデーパス' }
 	}
     },
     指定席選択: {
@@ -37,14 +36,21 @@ var states = {
     新幹線指定席選択: {
 	画像: 'https://gyazo.com/b6a4379be160f099e8ce568a03f67793.png',
 	ボタン: {
-	    button31:         { 座標: button31, 遷移: () => 'トップ'},
-	    button32:         { 座標: button32, 遷移: () => 'トップ'},
-	    button33:         { 座標: button33, 遷移: () => 'トップ'}  //, function(){ return '指定席選択'; }]
+	    button31:         { 座標: button31,           遷移: () => 'トップ'},
+	    button32:         { 座標: button32,           遷移: () => 'トップ'},
+	    button33:         { 座標: button33,           遷移: () => 'トップ'}
 	}
     },
     あおもりホリデーパス: {
 	画像: 'https://gyazo.com/99756639f580e97ae6015f2173e44187.png',
 	ボタン: {
+	    トップに戻る:   { 座標: 全面戻るボタン,   遷移: () => 'トップ' }
+	}
+    },
+    仙台まるごとパス: {
+	画像: 'https://gyazo.com/eb4ec142d4a79ffbabbb8d9e12defce6.png',
+	ボタン: {
+	    トップに戻る:   { 座標: 全面戻るボタン,   遷移: () => 'トップ' }
 	}
     }
 }
@@ -63,8 +69,6 @@ function trans(name){ // stateに遷移
     image.attr('src',state.画像);
     image.css('width','100%');
     $('body').append(image);
-    // for(var j=0;j<state.ボタン.length;j++){
-    //	var button = state.ボタン[j][0];
     for (buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
 	var div = $('<div>').
@@ -100,6 +104,18 @@ function readLinks(id){ // RFIDのタッチ情報を取得
     return linkdata;
 }
 
+function nfc_id(entry){
+    var id = entry.link[0];
+    if(is_mac(id)) id = entry.link[1];
+    return id;
+}
+
+function reader_id(entry){
+    var id = entry.link[0];
+    if(! is_mac(id)) id = entry.link[1];
+    return id;
+}
+
 $(function() {
     var 券売機 = 鎌倉券売機
 
@@ -113,27 +129,35 @@ $(function() {
     //
     // 最も最近タッチされたカードのIDを取得
     //
-    var link = 鎌倉券売機リスト[0].link;
-    var nfcid = link[0];
-    if(is_mac(nfcid)) nfcid = link[1];
+    var touched_nfc = nfc_id(鎌倉券売機リスト[0]);
 
     //
     // 利用履歴取得
     // 最近の趣味がわかるハズ
     //
-    var nfc利用履歴リスト = readLinks(nfcid);
+    var nfc利用履歴リスト = readLinks(touched_nfc);
+    var done = false;
     nfc利用履歴リスト.forEach(function(利用履歴){
+	/*
 	var link = 利用履歴.link;
 	var target = link[0];
 	if(target == nfcid) target = link[1];
+	*/
+	var target = reader_id(利用履歴);
+
 	//
-	// targetごとにいろんな処理
+	// targetごとにいろんな処理!
 	//
-	if(target == 緑水亭ポスタ || true){
-	    // 遷移関数を変更
+	if(target == 緑水亭ポスタ && ! done){
+	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => '仙台まるごとパス';
+	    done = true;
+	}
+	if(target == 秋葉原サイネージ && ! done){
 	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
+	    done = true;
 	}
     });
     
     trans('トップ');
+    
 });
