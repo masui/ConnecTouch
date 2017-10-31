@@ -13,7 +13,7 @@ var 自由席ボタン =           { left:  '1%', top: '28%', width: '48%', heig
 var おトクなきっぷボタン =   { left: '50%', top: '28%', width: '48%', height: '25%' };
 
 var 新幹線指定席ボタン =     { left:  '1%', top: '16%', width: '47%', height: '16%' };
-var button22 = { left: '51%', top: '16%', width: '47%', height: '16%' };
+var 新幹線在来線のりつぎボタン = { left: '51%', top: '16%', width: '47%', height: '16%' };
 
 var button31 = { left:  '1%', top:  '9%', width: '31%', height: '14%' };
 var button32 = { left: '33%', top:  '9%', width: '31%', height: '14%' };
@@ -34,8 +34,8 @@ var states = {
     指定席選択: {
 	画像: 'https://gyazo.com/3a1f7bd4053a1989b9d32e1f2b8ce30e.png',
 	ボタン: {
-	    新幹線指定席:     { 座標: 新幹線指定席ボタン, 遷移: () => '新幹線指定席選択'},
-	    button22:         { 座標: button22,           遷移: () => 'トップ' }
+	    新幹線指定席:          { 座標: 新幹線指定席ボタン,         遷移: () => '新幹線指定席選択'},
+	    新幹線在来線のりつぎ:  { 座標: 新幹線在来線のりつぎボタン, 遷移: () => 'トップ' }
 	}
     },
     新幹線指定席選択: {
