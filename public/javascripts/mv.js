@@ -3,6 +3,9 @@
 //
 // 2017/10/31 Toshiyuki Masui
 //
+// 誰かがポスタやサイネージにタッチした後で券売機に行って「おトクなきっぷ」
+// を選択すると、履歴に応じておすすめ案内が表示される
+//
 
 var 指定席ボタン   =         { left:  '1%', top:  '2%', width: '48%', height: '25%' };
 var 乗換案内から購入ボタン = { left: '50%', top:  '2%', width: '48%', height: '25%' };
@@ -105,9 +108,8 @@ function transfunc(destfunc){
     };
 }
 
-function trans(name){ // stateに遷移
+function trans(name){ // nameというstateに遷移
     if(name == 'トップ') update();
-
     
     $('body').empty();
     $('body').css('margin',0);
@@ -144,14 +146,7 @@ function readLinks(id){ // RFIDのタッチ情報を取得
     $.ajaxSetup({async: false});
     $.getJSON(api, null, function(data, status){
 	if (status == 'success') {
-	    linkdata = data
-	    /*
-	    if(data.length > 0){
-		firstdata = data[0];
-		lastdata = data[data.length-1];
-		var date_obj = new Date(firstdata.time * 1000);
-	    }
-	    */
+	    linkdata = data;
 	}
     });
     return linkdata;
