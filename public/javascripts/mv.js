@@ -7,19 +7,19 @@
 // を選択すると、履歴に応じておすすめ案内が表示される
 //
 
-var 指定席ボタン   =         { left:  '1%', top:  '2%', width: '48%', height: '25%' };
-var 乗換案内から購入ボタン = { left: '50%', top:  '2%', width: '48%', height: '25%' };
-var 自由席ボタン =           { left:  '1%', top: '28%', width: '48%', height: '25%' };
-var おトクなきっぷボタン =   { left: '50%', top: '28%', width: '48%', height: '25%' };
+var 指定席ボタン   =             { left:  '1%', top:  '2%', width: '48%', height: '25%' };
+var 乗換案内から購入ボタン =     { left: '50%', top:  '2%', width: '48%', height: '25%' };
+var 自由席ボタン =               { left:  '1%', top: '28%', width: '48%', height: '25%' };
+var おトクなきっぷボタン =       { left: '50%', top: '28%', width: '48%', height: '25%' };
 
-var 新幹線指定席ボタン =     { left:  '1%', top: '16%', width: '47%', height: '16%' };
+var 新幹線指定席ボタン =         { left:  '1%', top: '16%', width: '47%', height: '16%' };
 var 新幹線在来線のりつぎボタン = { left: '51%', top: '16%', width: '47%', height: '16%' };
 
-var button31 = { left:  '1%', top:  '9%', width: '31%', height: '14%' };
-var button32 = { left: '33%', top:  '9%', width: '31%', height: '14%' };
-var button33 = { left: '65%', top:  '9%', width: '31%', height: '14%' };
+var button31 =                   { left:  '1%', top:  '9%', width: '31%', height: '14%' };
+var button32 =                   { left: '33%', top:  '9%', width: '31%', height: '14%' };
+var button33 =                   { left: '65%', top:  '9%', width: '31%', height: '14%' };
 
-var 全面戻るボタン = { left: '0%', top:  '0%', width: '100%', height: '100%' };
+var 全面ボタン =                 { left: '0%', top:  '0%', width: '100%', height: '100%' };
 
 var states = {
     トップ: {
@@ -49,13 +49,13 @@ var states = {
     あおもりホリデーパス: {
 	画像: 'https://gyazo.com/99756639f580e97ae6015f2173e44187.png',
 	ボタン: {
-	    トップに戻る:   { 座標: 全面戻るボタン,   遷移: () => 'トップ' }
+	    トップに戻る:   { 座標: 全面ボタン,   遷移: () => 'トップ' }
 	}
     },
     仙台まるごとパス: {
 	画像: 'https://gyazo.com/eb4ec142d4a79ffbabbb8d9e12defce6.png',
 	ボタン: {
-	    トップに戻る:   { 座標: 全面戻るボタン,   遷移: () => 'トップ' }
+	    トップに戻る:   { 座標: 全面ボタン,   遷移: () => 'トップ' }
 	}
     }
 };
