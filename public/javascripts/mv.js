@@ -133,7 +133,7 @@ function trans(name){ // nameというstateに遷移
 	    css('left',button.left).
 	    css('width',button.width).
 	    css('height',button.height).
-	    css('opacity',0.3);
+	    css('opacity',0.0);
 	div.on('click', transfunc(state.ボタン[buttonname].遷移));
 	$('body').append(div);
     }
