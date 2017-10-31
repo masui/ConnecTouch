@@ -109,7 +109,8 @@ function transfunc(destfunc){
 }
 
 function trans(name){ // nameというstateに遷移
-    if(name == 'トップ') update();
+    // if(name == 'トップ')
+    update();
     
     $('body').empty();
     $('body').css('margin',0);
