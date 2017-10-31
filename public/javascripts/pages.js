@@ -4,6 +4,23 @@ $(function(){
   console.log(currentURL)
   const currentID = '114b34d0316e228' //とりあえず決め打ち
 
+  const namelist = [
+                    ['増井Suica','0110041085168d11'],
+                    ['増井SFCカード','01147302560fd305'],
+                    ['早川Suica','011401147f10c10a'],
+                    ['早川学生証','0114b34d2414b148'],
+                    ['佐竹学生証','0114b34d0316e228'],
+                    ['佐藤学生証','0114c302c014bf0f']
+                  ];
+
+  const placelist = [
+                      ['秋葉原サイネージ','0023dfdfe588'],
+                      ['湘南台サイネージ','f45c89bfd495'],
+                      ['増井Mac','a45e60e40c05'],
+                      ['緑水亭ポスタ','0022cf46f69b'],
+                      ['鎌倉券売機','b827ebc26e60']
+                    ];
+
  // 増井Suica      0110041085168d11
  // 増井SFCカード  01147302560fd305
  // 早川Suica      011401147f10c10a
@@ -40,26 +57,39 @@ $(function(){
 
         // console.log(otherReaders)
         for(index in data){
-
-          switch (data[index].link[0]) {
-            case '0110041085168d11':
-                  return '増井'
-                  break;
-            case '01147302560fd305':
-                  return '増井'
-                  break;
-            case '011401147f10c10a':
-                  return '早川'
-                  break;
-            case '0114b34d2414b148':
-                  return '早川'
-                  break;
-            case '0114b34d0316e228':
-                  return '佐竹'
-                  break;
-            default:
-                  break;
+          for(let i = 0; i < namelist.length; i++){
+            if(namelist[i][1] == data[index].link[1]){
+              data[index].link[1] = namelist[i][0];
+              break;
+            }
           }
+
+          for(let k = 0; k < placelist.length; k++){
+            if(placelist[k][1] == data[index].link[0]){
+              data[index].link[0] = placelist[k][0];
+              break;
+            }
+          }
+
+          // switch (data[index].link[0]) {
+          //   case '0110041085168d11':
+          //         return '増井'
+          //         break;
+          //   case '01147302560fd305':
+          //         return '増井'
+          //         break;
+          //   case '011401147f10c10a':
+          //         return '早川'
+          //         break;
+          //   case '0114b34d2414b148':
+          //         return '早川'
+          //         break;
+          //   case '0114b34d0316e228':
+          //         return '佐竹'
+          //         break;
+          //   default:
+          //         break;
+          // }
 
           $('ul').append('<li>' + data[index].link + '</li>')
         }
