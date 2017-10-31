@@ -2,7 +2,7 @@
 // 券売機シミュレータ
 //
 
-var button11 = { left:   0, top:  10, width: 400, height: 140 };
+var button11 = { left:   '20%', top:  '20%', width: 40, height: 140 };
 var button12 = { left: 400, top:  10, width: 400, height: 140 };
 var button13 = { left:   0, top: 150, width: 400, height: 140 };
 var button14 = { left: 400, top: 150, width: 400, height: 140 };
@@ -20,7 +20,7 @@ states['トップ'] = {
     buttons: [
 	[button11, '指定席選択'],
 	[button12, '指定席選択',
-	 function(){ return '指定席選択'; } // 状況によって飛び先を変える!
+	 function(){ alert(10); return '指定席選択'; } // 状況によって飛び先を変える!
 	]
     ]
 };
@@ -51,10 +51,11 @@ function transfunc(s, destfunc){
 
 function trans(name){ // stateに遷移
     $('body').empty();
+    $('body').css('margin',0);
     var state = states[name];
     var image = $('<img>');
     image.attr('src',state.image);
-    image.css('width',800);
+    image.css('width','100%');
     $('body').append(image);
     for(var j=0;j<state.buttons.length;j++){
 	var button = state.buttons[j][0];
