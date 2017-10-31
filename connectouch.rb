@@ -103,8 +103,14 @@ get '/removelink' do
 end
 
 get '/links' do
-  # cross_origin
-  db['link'].find().to_a.to_json
+  id = params['id']
+  if id.to_s == ''
+    db['link'].find.sort(:time, :desc).to_a[0..9].to_json # 降順 10個だけ
+  else
+    db['link'].find.sort(:time, :desc).find_all { |e|
+      e['link'][0] == id || e['link'][1] == id
+    }.to_a[0..9].to_json
+  end
 end
 
 
