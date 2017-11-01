@@ -7,23 +7,28 @@
 // を選択すると、履歴に応じておすすめ案内が表示される
 //
 
-var 指定席ボタン   =             { left:  '1%', top:  '2%', width: '48%', height: '25%' };
-var 乗換案内から購入ボタン =     { left: '50%', top:  '2%', width: '48%', height: '25%' };
-var 自由席ボタン =               { left:  '1%', top: '28%', width: '48%', height: '25%' };
-var おトクなきっぷボタン =       { left: '50%', top: '28%', width: '48%', height: '25%' };
+//
+// クリッカブルマップの座標
+//
+// https://labs.d-s-b.jp/ImagemapGenerator/ で計算
+//
+var 指定席ボタン =               { left:  23, top:  23, right:  761, bottom: 269 };
+var 乗換案内から購入ボタン =     { left: 797, top:  24, right: 1534, bottom: 268 };
+var 自由席ボタン =               { left:  23, top: 293, right:  760, bottom: 536 };
+var おトクなきっぷボタン =       { left: 797, top: 293, right: 1534, bottom: 536 };
 
-var 新幹線指定席ボタン =         { left:  '1%', top: '16%', width: '47%', height: '16%' };
-var 新幹線在来線のりつぎボタン = { left: '51%', top: '16%', width: '47%', height: '16%' };
+var 新幹線指定席ボタン =         { left:  16, top:  98, right:  430, bottom: 184 };
+var 新幹線在来線のりつぎボタン = { left: 467, top:  97, right:  883, bottom: 184 };
 
-var button31 =                   { left:  '1%', top:  '9%', width: '31%', height: '14%' };
-var button32 =                   { left: '33%', top:  '9%', width: '31%', height: '14%' };
-var button33 =                   { left: '65%', top:  '9%', width: '31%', height: '14%' };
+var button31 =                   { left:  17, top:  59, right:  290, bottom: 132 };
+var button32 =                   { left: 306, top:  59, right:  576, bottom: 132 };
+var button33 =                   { left: 594, top:  58, right:  864, bottom: 132 };
 
-var 全面ボタン =                 { left: '0%', top:  '0%', width: '100%', height: '100%' };
+var 全面ボタン =                 { left:   0, top:   0, right: 2000, bottom: 1000 };
 
 var states = {
     トップ: {
-	画像: 'https://gyazo.com/2069fefaec99bff27e6fde58f90bcd7e.png',
+	画像: 'https://gyazo.com/2069fefaec99bff27e6fde58f90bcd7e.png', // 1570 x 942
 	ボタン: {
 	    指定席:           { 座標: 指定席ボタン,           遷移: () => '指定席選択' },
 	    乗換案内から購入: { 座標: 乗換案内から購入ボタン, 遷移: () => '指定席選択' },
@@ -121,22 +126,24 @@ function trans(name){ // nameというstateに遷移
     var image = $('<img>');
     image.attr('src',state.画像);
     image.css('width','100%');
+    image.attr('usemap','#ImageMap');
+    image.rwdImageMaps(); // クリッカブルマップを拡大
     $('body').append(image);
+    var map = $('<map>');
+    map.attr('name','ImageMap');
+    image.append(map);
+    
     //
     // ボタン表示、遷移定義
     //
     for (buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
-	var div = $('<div>').
-	    css('position','absolute').
-	    css('background-color','#ff0').
-	    css('top',button.top).
-	    css('left',button.left).
-	    css('width',button.width).
-	    css('height',button.height).
-	    css('opacity',0.0);
-	div.on('click', transfunc(state.ボタン[buttonname].遷移));
-	$('body').append(div);
+	var area = $('<area>');
+	map.append(area);
+	area.attr('shape','rect');
+	area.attr('coords',`${button.left},${button.top},${button.right},${button.bottom}`);
+	//area.attr('href','http://pitecan.com');
+	area.on('click', transfunc(state.ボタン[buttonname].遷移));
     }
 };
 
