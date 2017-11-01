@@ -67,3 +67,11 @@ function changeSrc(cid, sidAry){
 function returnTop() {
     $('#page').attr('src',"http://jasf.org/rosenzu/map_tokyo.png");
 }
+
+$(function() {
+    $('#page').attr('marginwidth',0);
+    $('#top').on('click',returnTop);
+    $('#recommend').on('click',readLinks);
+
+    returnTop();
+});
