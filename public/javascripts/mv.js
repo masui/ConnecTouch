@@ -10,7 +10,7 @@
 //
 // クリッカブルマップの座標
 //
-// https://labs.d-s-b.jp/ImagemapGenerator/ で計算
+// https://labs.d-s-b.jp/ImagemapGenerator/ で取得
 //
 var 指定席ボタン =               { left:  23, top:  23, right:  761, bottom: 269 };
 var 乗換案内から購入ボタン =     { left: 797, top:  24, right: 1534, bottom: 268 };
@@ -114,34 +114,35 @@ function transfunc(destfunc){
 }
 
 function trans(name){ // nameというstateに遷移
-    // if(name == 'トップ')
+    var state = states[name];
+    
     update();
     
-    $('body').empty();
-    $('body').css('margin',0);
-    var state = states[name];
+    $('body').
+	empty().
+	css('margin',0);
+
     //
     // バックグラウンド画像表示
     //
-    var image = $('<img>');
-    image.attr('src',state.画像);
-    image.css('width','100%');
-    image.attr('usemap','#ImageMap');
-    image.rwdImageMaps(); // クリッカブルマップを拡大
-    $('body').append(image);
-    var map = $('<map>');
-    map.attr('name','ImageMap');
-    image.append(map);
-    
+    var image = $('<img>').
+	    attr('src',state.画像).
+	    css('width','100%').
+	    attr('usemap','#ImageMap').
+	    appendTo($('body')).
+	    rwdImageMaps();               // クリッカブルマップを拡大
+    var map = $('<map>').
+	    attr('name','ImageMap').
+	    appendTo(image);
     //
     // ボタン表示、遷移定義
     //
     for (buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
-	var area = $('<area>');
-	map.append(area);
-	area.attr('shape','rect');
-	area.attr('coords',`${button.left},${button.top},${button.right},${button.bottom}`);
+	var area = $('<area>').
+		appendTo(map).
+		attr('shape','rect').
+		attr('coords',`${button.left},${button.top},${button.right},${button.bottom}`);
 	//area.attr('href','http://pitecan.com');
 	area.on('click', transfunc(state.ボタン[buttonname].遷移));
     }
