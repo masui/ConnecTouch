@@ -26,7 +26,11 @@ var button33 =                   { left: 594, top:  58, right:  864, bottom: 132
 
 var 全面ボタン =                 { left:   0, top:   0, right: 2000, bottom: 1000 };
 
+//
+// 状態定義
+//
 var states = {
+    // 画像は https://www.youtube.com/watch?v=pQMaUxD8txg などから取得
     トップ: {
 	画像: 'https://gyazo.com/2069fefaec99bff27e6fde58f90bcd7e.png', // 1570 x 942
 	ボタン: {
@@ -68,7 +72,7 @@ var states = {
 //
 // ユーザを調べ、それに応じて状態遷移を変える
 //
-function update_nfc_info(){
+function updateNfcInfo(){
     var 券売機 = 鎌倉券売機;
 
     // 券売機関連のリンクを取得
@@ -78,17 +82,17 @@ function update_nfc_info(){
     // 最も最近タッチされたカードのIDを取得
     // e.g. 増井Suica
     //
-    var touched_nfc = nfc_id(鎌倉券売機リスト[0]);
+    var touchedNfc = nfcId(鎌倉券売機リスト[0]);
 
     //
     // 利用履歴取得
     // 最近の趣味がわかるハズ
     //
-    var nfc利用履歴リスト = readLinks(touched_nfc);
+    var nfc利用履歴リスト = readLinks(touchedNfc);
     
     var done = false;
     nfc利用履歴リスト.forEach(function(利用履歴){
-	var target = reader_id(利用履歴);
+	var target = readerId(利用履歴);
 	//
 	// targetごとにいろんな処理!
 	//
@@ -113,17 +117,18 @@ function transfunc(destfunc){
     };
 }
 
-function trans(name){ // nameというstateに遷移
+function trans(name){ // nameという状態に遷移
     var state = states[name];
     
-    update_nfc_info(); // NFC情報更新。 遷移のたびに更新は問題だが
-    
-    $('body').
-	empty().
-	css('margin',0);
+    updateNfcInfo(); // NFC情報更新。 遷移のたびに更新は問題だが
 
     //
-    // バックグラウンド画像表示
+    // バックグラウンドをクリア
+    //
+    $('body').empty().css('margin',0).css('padding',0);
+
+    //
+    // バックグラウンドに画像表示
     //
     var image = $('<img>').
 	    attr('src',state.画像).
@@ -131,11 +136,14 @@ function trans(name){ // nameというstateに遷移
 	    attr('usemap','#ImageMap').
 	    appendTo($('body')).
 	    rwdImageMaps();               // クリッカブルマップを拡大
+    //
+    // クリッカブルマップ定義
+    //
     var map = $('<map>').
 	    attr('name','ImageMap').
 	    appendTo(image);
     //
-    // ボタン表示、遷移定義
+    // クリッカブルマップ上のボタン領域と遷移定義
     //
     for (buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
@@ -143,15 +151,13 @@ function trans(name){ // nameというstateに遷移
 		appendTo(map).
 		attr('shape','rect').
 		attr('coords',`${button.left},${button.top},${button.right},${button.bottom}`);
-	//area.attr('href','http://pitecan.com');
 	area.on('click', transfunc(state.ボタン[buttonname].遷移));
     }
 };
 
-function readLinks(id){ // RFIDのタッチ情報を取得
+function readLinks(id='', limit=10){ // RFIDのタッチ情報をConnecTouch.orgから取得
     var linkdata = [];
-    var api = 'http://connectouch.org/links';
-    if(id) api = `${api}?id=${id}`;
+    var api = `http://connectouch.org/links?id=${id}&limit=${limit}`;
     $.ajaxSetup({async: false});
     $.getJSON(api, null, function(data, status){
 	if (status == 'success') {
@@ -161,15 +167,15 @@ function readLinks(id){ // RFIDのタッチ情報を取得
     return linkdata;
 }
 
-function nfc_id(entry){
+function nfcId(entry){
     var id = entry.link[0];
-    if(is_mac(id)) id = entry.link[1];
+    if(isMac(id)) id = entry.link[1];
     return id;
 }
 
-function reader_id(entry){
+function readerId(entry){
     var id = entry.link[0];
-    if(! is_mac(id)) id = entry.link[1];
+    if(! isMac(id)) id = entry.link[1];
     return id;
 }
 

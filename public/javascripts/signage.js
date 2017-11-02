@@ -1,3 +1,7 @@
+//
+// RFIDのIDなどは javascripts/ids.js で定義している
+//
+
 function readLinks(){
     const linkURL = 'http://connectouch.org/links';
     $.getJSON(
