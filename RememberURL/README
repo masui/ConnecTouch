@@ -3,11 +3,13 @@
 * RememberURL はRFIDとかと特に関係がない
   Web閲覧履歴を記録するだけ
 
-* Webアクセスをローカルに記録する ~/Sites/rememberurl.cgi を拡張機能から呼ぶ
-  chmod +x すること
-  
 * 本ディレクトリをChromeで拡張機能登録登録
   manifest.json と rememberurl.js
+  
+* Webアクセスをローカルに記録する ~/Sites/rememberurl.cgi を拡張機能から
+  呼んでいたが、これだとhttpsなサイトのログを取得できない
 
-★ HTTPSなサイトからrememberurl.cgiを呼べない
-   rememberurl.cgiもHTTPSなサイトに置く必要ありそう
+  - rememberurl.cgiもHTTPSなサイトに置く必要ありそう
+  - https://www.pitecan.com/rememberurl.cgi を利用
+
+

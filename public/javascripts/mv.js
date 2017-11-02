@@ -73,8 +73,11 @@ var states = {
 // ユーザを調べ、それに応じて状態遷移を変える
 //
 function updateNfcInfo(){
+    //
     // 券売機関連のリンクを取得
+    //
     var 鎌倉券売機リスト = getHistory(鎌倉券売機);
+    if(! 鎌倉券売機リスト) return;
 
     //
     // 最も最近タッチされたカードのIDを取得
