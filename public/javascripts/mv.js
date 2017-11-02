@@ -73,16 +73,15 @@ var states = {
 // ユーザを調べ、それに応じて状態遷移を変える
 //
 function updateNfcInfo(){
-    var 券売機 = 鎌倉券売機;
-
     // 券売機関連のリンクを取得
-    var 鎌倉券売機リスト = getHistory(券売機);
+    var 鎌倉券売機リスト = getHistory(鎌倉券売機);
 
     //
     // 最も最近タッチされたカードのIDを取得
     // e.g. 増井Suica
     //
     var touchedNfc = nfcId(鎌倉券売機リスト[0]);
+    if(! touchedNfc) return;
 
     //
     // 利用履歴取得
@@ -122,7 +121,7 @@ function trans(name){ // nameという状態に遷移
     updateNfcInfo(); // NFC情報更新。 遷移のたびに更新は問題だが
 
     //
-    // バックグラウンドをクリア
+    // 画面クリア
     //
     $('body').empty().css('margin',0).css('padding',0);
 
