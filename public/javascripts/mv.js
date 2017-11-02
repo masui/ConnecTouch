@@ -76,7 +76,7 @@ function updateNfcInfo(){
     var 券売機 = 鎌倉券売機;
 
     // 券売機関連のリンクを取得
-    var 鎌倉券売機リスト = readLinks(券売機);
+    var 鎌倉券売機リスト = readHistory(券売機);
 
     //
     // 最も最近タッチされたカードのIDを取得
@@ -88,27 +88,26 @@ function updateNfcInfo(){
     // 利用履歴取得
     // 最近の趣味がわかるハズ
     //
-    var nfc利用履歴リスト = readLinks(touchedNfc);
+    var nfc利用履歴リスト = readHistory(touchedNfc);
     
-    var done = false;
-    nfc利用履歴リスト.forEach(function(利用履歴){
+    for(var 利用履歴 in nfc利用履歴リスト){
 	var target = readerId(利用履歴);
 	//
 	// targetごとにいろんな処理!
 	//
 	if(target == 緑水亭ポスタ && ! done){
 	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => '仙台まるごとパス';
-	    done = true;
+	    break;
 	}
 	if(target == 秋葉原サイネージ && ! done){
 	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
-	    done = true;
+	    break;
 	}
 	if(target == 湘南台サイネージ && ! done){
 	    states.トップ.ボタン.おトクなきっぷ.遷移 = () => 'あおもりホリデーパス';
-	    done = true;
+	    break;
 	}
-    });
+    }
 }
 
 function transfunc(destfunc){
@@ -145,7 +144,7 @@ function trans(name){ // nameという状態に遷移
     //
     // クリッカブルマップ上のボタン領域と遷移定義
     //
-    for (buttonname in state.ボタン){
+    for(var buttonname in state.ボタン){
 	var button = state.ボタン[buttonname].座標;
 	var area = $('<area>').
 		appendTo(map).
@@ -154,30 +153,6 @@ function trans(name){ // nameという状態に遷移
 	area.on('click', transfunc(state.ボタン[buttonname].遷移));
     }
 };
-
-function readLinks(id='', limit=10){ // RFIDのタッチ情報をConnecTouch.orgから取得
-    var linkdata = [];
-    var api = `http://connectouch.org/links?id=${id}&limit=${limit}`;
-    $.ajaxSetup({async: false});
-    $.getJSON(api, null, function(data, status){
-	if (status == 'success') {
-	    linkdata = data;
-	}
-    });
-    return linkdata;
-}
-
-function nfcId(entry){
-    var id = entry.link[0];
-    if(isMac(id)) id = entry.link[1];
-    return id;
-}
-
-function readerId(entry){
-    var id = entry.link[0];
-    if(! isMac(id)) id = entry.link[1];
-    return id;
-}
 
 $(function() {
     trans('トップ');
