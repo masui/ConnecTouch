@@ -3,8 +3,8 @@
 //
 // 2017/10/31 Toshiyuki Masui
 //
-// 誰かがポスタやサイネージにタッチした後で券売機に行って「おトクなきっぷ」
-// を選択すると、履歴に応じておすすめ案内が表示される
+// 誰かがポスタやサイネージにタッチした後で券売機に行って「おトクなきっぷ」を選択すると
+// 履歴に応じておすすめ案内が表示される
 //
 
 //
@@ -76,7 +76,7 @@ function updateNfcInfo(){
     var 券売機 = 鎌倉券売機;
 
     // 券売機関連のリンクを取得
-    var 鎌倉券売機リスト = readHistory(券売機);
+    var 鎌倉券売機リスト = getHistory(券売機);
 
     //
     // 最も最近タッチされたカードのIDを取得
@@ -88,7 +88,7 @@ function updateNfcInfo(){
     // 利用履歴取得
     // 最近の趣味がわかるハズ
     //
-    var nfc利用履歴リスト = readHistory(touchedNfc);
+    var nfc利用履歴リスト = getHistory(touchedNfc);
     
     for(var 利用履歴 in nfc利用履歴リスト){
 	var target = readerId(利用履歴);

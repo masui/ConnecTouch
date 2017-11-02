@@ -1,7 +1,7 @@
 //
 // 各種ライブラリ
 //
-function readHistory(id='', limit=10){ // RFIDのタッチ情報をConnecTouch.orgから取得
+function getHistory(id='', limit=10){ // RFIDのタッチ情報をConnecTouch.orgから取得
     var linkdata = [];
     var api = `http://connectouch.org/links?id=${id}&limit=${limit}`;
     $.ajaxSetup({async: false});
