@@ -35,6 +35,17 @@ Suicaを使って各種の情報共有/コミュニケーションする実験
 
 <ul>
 <li><a href="http://ConnecTouch.org/links">リンクのリスト</a></li>
+</ul>
+
+<h2>デモ</h2>
+
+<ul>
+<li><a href="http://ConnecTouch.org/mv.html">券売機</a></li>
+<li><a href="http://ConnecTouch.org/signage.html">サイネージ</a></li>
+</ul>
+
+
+
 
 
 
