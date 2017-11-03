@@ -9,7 +9,8 @@
 * Webアクセスをローカルに記録する ~/Sites/rememberurl.cgi を拡張機能から
   呼んでいたが、これだとhttpsなサイトのログを取得できない
 
-  - rememberurl.cgiもHTTPSなサイトに置く必要ありそう
-  - https://www.pitecan.com/rememberurl.cgi を利用
-
+  - https://www.pitecan.com/remember.cgi を利用
+    remember.cgi?id=masui&url=http://example.com 登録
+    remember.cgi?id=masui                        検索
+    remember.cgi?id=masui&limit=100
 
