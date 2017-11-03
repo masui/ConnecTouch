@@ -113,10 +113,12 @@ get '/links' do
   end
 end
 
-
-
 get '/' do
-  "Hello!"
+  redirect 'https://masui.github.io/ConnecTouch/'
+end
+
+get '/index.html' do
+  redirect 'https://masui.github.io/ConnecTouch/'
 end
 
 error do
