@@ -9,7 +9,7 @@ $(function(){
 	   {
 	       type: 'get',
 	       // async: false,
-	       data: { url: location.href, id: 'masui' },
+	       data: { url: location.href, title: document.title, id: 'masui' },
 	       dataType: 'text'
 	   }
 	  );

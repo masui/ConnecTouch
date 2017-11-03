@@ -15,6 +15,7 @@ require 'uri'
 cgi = CGI.new('html3')
 
 url =   URI.decode(cgi.params['url'][0].to_s.force_encoding('utf-8'))
+title = URI.decode(cgi.params['title'][0].to_s.force_encoding('utf-8'))
 id =    (cgi.params['id'][0] || '_').to_s
 limit = (cgi.params['limit'][0] || 10).to_i
 
@@ -22,7 +23,7 @@ logfile = "#{id}.log"
 
 if url != '' then
   File.open(logfile,"a"){ |f|
-    f.puts "#{Time.now.to_i}\t#{url}"
+    f.puts "#{Time.now.to_i}\t#{url}\t#{title}"
   }
 end
  
@@ -33,8 +34,8 @@ if File.exist?(logfile)
   start = len - limit
   start = 0 if start < 0
   (start...len).each { |i|
-    (time,url) = lines[i].split(/\t/)
-    data.push ({ time:time, url:url })
+    (time,url,title) = lines[i].split(/\t/)
+    data.push ({ time:time, url:url, title:title })
   }
 end
 
