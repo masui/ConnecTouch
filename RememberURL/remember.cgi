@@ -14,7 +14,7 @@ require 'uri'
 
 cgi = CGI.new('html3')
 
-url =   URI.decode(cgi.params['url'][0].to_s)
+url =   URI.decode(cgi.params['url'][0].to_s.force_encoding('utf-8'))
 id =    (cgi.params['id'][0] || '_').to_s
 limit = (cgi.params['limit'][0] || 10).to_i
 
@@ -25,10 +25,10 @@ if url != '' then
     f.puts "#{Time.now.to_i}\t#{url}"
   }
 end
-
+ 
 data = []
 if File.exist?(logfile)
-  lines = File.read(logfile).split(/\n/)
+  lines = File.read(logfile).force_encoding('utf-8').split(/\n/)
   len = lines.length
   start = len - limit
   start = 0 if start < 0
@@ -38,4 +38,4 @@ if File.exist?(logfile)
   }
 end
 
-cgi.out({"Access-Control-Allow-Origin" => '*'}) { data.to_json }
+cgi.out({'Content-Type' => 'text/plain; charset=utf-8', 'Access-Control-Allow-Origin' => '*'}) { data.to_json }
