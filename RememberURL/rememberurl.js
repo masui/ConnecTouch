@@ -8,8 +8,8 @@ $(function(){
     var ignorePatterns = [
 	/wifemovie/
     ];
-    for(var pattern in ignorePatterns){
-	if(location.href.match(pattern)){
+    for(var i=0; i<ignorePatterns.length; i++){
+	if(location.href.match(ignorePatterns[i])){
 	    valid = false;
 	}
     }
