@@ -113,14 +113,15 @@ get '/links' do
   end
 end
 
-get '/' do
-  redirect 'https://masui.github.io/ConnecTouch/'
-end
-
-get '/index.html' do
-  redirect 'https://masui.github.io/ConnecTouch/'
-end
+#get '/' do
+#  redirect 'https://masui.github.io/ConnecTouch/'
+#end
+#
+#get '/index.html' do
+#  redirect 'https://masui.github.io/ConnecTouch/'
+#end
 
 error do
   "Error!"
 end
+
