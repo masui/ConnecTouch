@@ -26,4 +26,5 @@ const 増井SFCカード =    '01147302560fd305';
 const 佐竹学生証 =       '0114b34d0316e228';
 const 早川学生証 =       '0114b34d2414b148';
 const 及川SFCカード =    '0114c302c014bf0f';
+const 伊藤iPhoneX =      '0139001cb197e6f5';
 
