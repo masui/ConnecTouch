@@ -28,3 +28,9 @@ const 早川学生証 =       '0114b34d2414b148';
 const 及川SFCカード =    '0114c302c014bf0f';
 const 伊藤iPhoneX =      '0139001cb197e6f5';
 
+// サイネージ用データ（差し当たり）
+const signage      = 増井Mac;
+const akibaSight   = 秋葉原サイネージ;
+const fujisawaFood = 湘南台サイネージ; 
+const sendaiRelax  = 緑水亭ポスタ;
+const niigataAmuse = 鎌倉券売機;
