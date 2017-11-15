@@ -20,11 +20,11 @@ const placelist = [
 
 $(function(){
   for (var i = 0; i < namelist.length; i++) {
-    $('#namelist').append('<li class="name"><a href="pages/mobile_content.html?'+ namelist[i][1] +'">' + namelist[i][0] + '</a></li>');
+    $('#namelist').append('<li class="name"><a href="pages/mobile_content.html?n'+ namelist[i][1] +'">' + namelist[i][0] + '</a></li>');
   }
   $('.name').hide();
   for (var i = 0; i < placelist.length; i++) {
-    $('#placelist').append('<li class="place"><a href="pages/mobile_content.html?'+ placelist[i][1] +'">' + placelist[i][0] + '</a></li>');
+    $('#placelist').append('<li class="place"><a href="pages/mobile_content.html?p'+ placelist[i][1] +'">' + placelist[i][0] + '</a></li>');
   }
   $('.place').hide();
 })
