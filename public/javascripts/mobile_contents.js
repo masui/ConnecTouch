@@ -23,7 +23,7 @@ $(function() {
   //console.log(param);
 
   const linkURL = 'http://connectouch.org/links?id=' + ids;
-  $('.title').append(list[param]);
+  $('.text').append(list[param]);
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
@@ -45,9 +45,9 @@ $(function() {
           data[index].link[1] = list['n' + data[index].link[1]];
           data[index].link[0] = list['p' + data[index].link[0]];
           if (type == 'n') {
-            $('ul').append('<li>' + data[index].link[0] + ' ' + calTime(data[index].time) + '</li>');
+            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[0] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           } else if (type == 'p') {
-            $('ul').append('<li>' + data[index].link[1] + ' ' + calTime(data[index].time) + '</li>');
+            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[0] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           }
 
         }
