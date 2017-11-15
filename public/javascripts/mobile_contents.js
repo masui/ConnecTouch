@@ -47,7 +47,7 @@ $(function() {
           if (type == 'n') {
             $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[0] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           } else if (type == 'p') {
-            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[0] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
+            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[1] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           }
 
         }
