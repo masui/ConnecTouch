@@ -3,22 +3,29 @@
   padding: 0;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
+  font-size: 1.4em;
   overflow: hidden;
 }
 
 header{
-  width:100%;
-  height:10%;
-  position:fixed;
-  background: #211917;
-  z-index:100;
-  top:0;
+  width: 100vw;
+  height: 10vh;
+  position: fixed;
+  background-image: linear-gradient(120deg, #155799, #159957);
+  z-index: 100;
+  top: 0;
 }
 
 .main {
   display: flex;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .btn {
@@ -26,30 +33,31 @@ header{
   justify-content: center;
   align-items: center;
   width:300;
-  height:100;
+  height:100%;
   margin:10;
-  font-size: 2rem;
-  color: white;
 }
 
 a {
   text-decoration: none;
+  text-align: center;
   color: white;
+  height: 75%;
+  font-size: 3vh;
 }
 
-#siteArea {
-  height: 90%;
+#siteAnchor {
+  height: 10vh;
 }
 
 #page {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 90vh;
   border: none;
 }
 
-#mapArea {
-  height: 90%;
-  margin-top: 5%;
+#mapAnchor {
+  height: 90vh;
+  top: 10vh;
 }
 
 #mapCanvas { 
@@ -58,11 +66,10 @@ a {
   height:100%;
 }
 
-#routePanel {
+#routeCanvas {
   background-color: white;
   overflow: auto;
   float:right;
   width:30%;
   height:100%;
-  margin-top: -0.5%;
 }

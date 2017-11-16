@@ -51,7 +51,7 @@ var data = [
   },
   { 
     name : "ヨドバシAkiba",
-    id : "0022cf46f69b", //緑水亭ポスタ
+    id : "0023dfdfe588", //緑水亭ポスタ
     url : "http://www.yodobashi-akiba.com/",
     location : {lat: 35.69, lng: 139.77}
   }

@@ -8,44 +8,26 @@
     <script src="javascripts/ids.js"></script>
     <script src="javascripts/signage_orf.js"></script>
     <script src="javascripts/map.js"></script>
-    <script>
-      // スムーズスクロール
-      $(function(){
-        $('a[href^=#]').click(function() {
-          var speed = 400;
-          var href= $(this).attr("href");
-          var target = $(href == "#" || href == "" ? 'html' : href);
-          var position = target.offset().top;
-          $('body,html').animate({scrollTop:position}, speed, 'swing');
-          return false;
-        });
-      });
-    </script>
   </head>
   <body>
 
     <header>
       <div class="main">
-        <div class="btn"><a id="top" href="#ancor">トップ</a></div>
-        <div class="btn"><a id="reco" href="#ancor">おすすめ</a></div>
-        <div class="btn"><a href="#ancor">サイト</a></div>
-        <div class="btn"><a href="#mapArea">マップ</a></div>
+        <div class="btn"><a id="top" href="#siteAnchor">トップ</a></div>
+        <div class="btn"><a id="reco" href="#siteAnchor">おすすめ</a></div>
+        <div class="btn"><a href="#siteAnchor">サイト</a></div>
+        <div class="btn"><a href="#mapAnchor">マップ</a></div>
       </div>
     </header>
 
-    <div id="ancor" style="height:10%;"></div>
+    <div id="siteAnchor"></div>
+    <iframe id='page'></iframe>
 
-    <div id="siteArea">
-      <iframe id='page'></iframe>
-    </div>
-
-    <div id="mapArea">
+    <div id="mapAnchor">
       <div id="mapCanvas"></div>
-      <div id="routePanel">
-        <div id="routeCanvas" style="width:100%"></div>
-      </div>
+      <div id="routeCanvas"></div>
     </div>
-  
+    
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPkM3u4YmZyMSIOlK-YyvOlBFzjvuh1Xs&callback=initMap">
     </script>
