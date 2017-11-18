@@ -1,121 +1,103 @@
 body {
   margin: 0px;
   padding: 0px;
+  height: 100%;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 40px;
   /*line-height: 1.5;*/
   color: #606c71;
-  background-color: #f0f0f0
+  /*background-color: #f0f0f0;*/
+  background-color: #e5e5e5;
 }
 
 #header {
   width: auto;
   margin: 0px;
   padding: 0px;
-  height: 50px;
-  color: #fff;
-  text-align: center;
+  height: 175px;
   background-color: #159957;
   background-image: linear-gradient(120deg, #155799, #159957);
 }
 
 .project-name {
-  margin-top: 0;
-  vertical-align: middle;
+  margin:0px;
+  color: #fff;
+  font-size: 60px;
+  line-height: 175px;
+  text-align: center;
 }
 
-.title {
+.menu {
+  display: block;
+  width: auto;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  height: 150px;
+  background-color: #969694;
+  position: relative;
+}
+
+.text{
+  display: block;
+  color: #fff;
+  font-size: 60px;
+  margin:0px;
+  line-height: 150px;
+  text-align: center;
+}
+
+
+
+
+
+
+.timeline {
+  margin: 0px;
+  padding: 0px;
+}
+
+.column {
   display: block;
   width: auto;
   margin: 2px 0px 0px 0px;
   padding: 0px;
-  height: 50px;
-  color: #fff;
-  background-color: #969694;
-  /*background-image: linear-gradient(120deg, #969696, #646464);*/
+  height: 150px;
+  background-color: #fdfdfd;
   position: relative;
 }
 
-.text, .back {
-  line-height: 50px;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-}
-
-.data {
+.link{
   position: absolute;
-  top: 30%;
+  display: block;
+  width :85%;
   margin: 0px;
   padding: 0px;
-  display: block;
-  left: 15px;
-  height: 50px;
-  text-decoration: none;
+  left: 15%;
+  height: 150px;
 }
 
+.place,.data{
+  line-height: 150px;
+  width :auto;
+  font-size: 50px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.data{
+  position: absolute;
+  left: 15%;
+}
 .time {
   position: absolute;
-  font-size: 15px;
-  top: 30%;
+  line-height: 150px;
+  font-size: 40px;
   margin: 0px;
   padding: 0px;
-  display: block;
-  right: 15px;
-  height: 50px;
-  text-decoration: none;
+  right: 5%;
+
 }
 
-.data_set {
-  width: auto;
-  height: 50px;
-  margin: 1px 0px 0px 0px;
-  padding: 0px;
-  background-color: #fdfdfd;
-  position: relative;
-}
-
-.place, .name {
-  display: none;
-  width: auto;
-  margin: 1px 0px 0px 0px;
-  padding: 0px;
-  height: 50px;
-  background-color: #fdfdfd;
-  position: relative;
-}
-
-.place{}
-
-
-.test {
+.icon {
   position: absolute;
-  top: 30%;
-  display: block;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  height: 50px;
-}
-
-a{
-  text-decoration: none;
-}
-
-a:visited{
-  color: #fff;
-}
-
-
-
-#namelist, #palcelist {
-  margin: 0px 0px 0px 0px;
-  padding: 0px;
-}
-
-#datalist {
-  margin: 0px 0px 0px 0px;
-  padding: 0px;
-  width: auto;
-  position: relative;
 }

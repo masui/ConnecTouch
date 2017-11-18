@@ -1,14 +1,14 @@
 $(function() {
 
   const list = {
-    n0110041085168d11: '増井Suica',
-    n01147302560fd305: '増井SFCカード',
-    n011401147f10c10a: '早川Suica',
-    n0114b34d2414b148: '早川学生証',
-    n0114b34d0316e228: '佐竹学生証',
-    n0114c302c014bf0f: '佐藤学生証',
-    n0114c302c014bf0f: '及川SFCカード',
-    n0139001cb197e6f5: '伊藤iPhoneX',
+    n0110041085168d11: '増井',
+    n01147302560fd305: '増井',
+    n011401147f10c10a: '早川',
+    n0114b34d2414b148: '早川',
+    n0114b34d0316e228: '佐竹',
+    n0114c302c014bf0f: '佐藤',
+    n0114c302c014bf0f: '及川',
+    n0139001cb197e6f5: '伊藤',
     p0023dfdfe588: '秋葉原サイネージ',
     pf45c89bfd495: '湘南台サイネージ',
     pa45e60e40c05: '増井Mac',
@@ -23,7 +23,7 @@ $(function() {
   //console.log(param);
 
   const linkURL = 'http://connectouch.org/links?id=' + ids;
-  $('.text').append(list[param]);
+  $('#title > .text').append(list[param]);
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
@@ -42,12 +42,16 @@ $(function() {
 
         for (index in data) {
 
-          data[index].link[1] = list['n' + data[index].link[1]];
-          data[index].link[0] = list['p' + data[index].link[0]];
+          let _time = calTime(data[index].time);
+          let _name = list['n' + data[index].link[1]];
+          let _place = list['p' + data[index].link[0]];
+
+          // data[index].link[1] = list['n' + data[index].link[1]];
+          // data[index].link[0] = list['p' + data[index].link[0]];
           if (type == 'n') {
-            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[0] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
+            $('#timeline').append('<div class="column" data-param="p'+ data[index].link[0]+'"><span class="data">' + _place + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           } else if (type == 'p') {
-            $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[1] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
+            $('#timeline').append('<div class="column" data-param="n'+ data[index].link[1]+'"><img class="icon" src="" alt="" /><span class="data">' + _name+ '</span><span class="time">' + _time + '</span></div>');
           }
 
         }
@@ -55,7 +59,18 @@ $(function() {
       } else {
         console.log('error')
       }
-    });
+    }
+  );
+
+  $('#timeline').on('click','.column',function() {
+    let param = $(this).data('param');
+    $(this).css("background-color","#bebebe");
+    let url = "mobile_content.html?" +param;
+    window.location.href = url;
+  })
+  $('#back').on('click',function() {
+    window.location.href = '../mobile.html';
+  })
 
 })
 
