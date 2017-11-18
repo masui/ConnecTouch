@@ -57,7 +57,7 @@ function changeSrc(directionsService, directionsDisplay){
 
 // TOPボタン
 function returnTop() {
-  $('#page').attr('src',"signage_top.html");
+  $('#page').attr('src',"railmap.html");
 }
 
 // iframの更新処理
