@@ -57,7 +57,7 @@ function changeSrc(directionsService, directionsDisplay){
 
 // TOPボタン
 function returnTop() {
-  $('#page').attr('src',"http://jasf.org/rosenzu/index.html");
+  $('#page').attr('src',"signage_top.html");
 }
 
 // iframの更新処理

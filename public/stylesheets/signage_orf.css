@@ -21,28 +21,32 @@ header{
   top: 0;
 }
 
-.main {
+.container {
   display: flex;
   justify-content: center;
   height: 100%;
   width: 100%;
 }
 
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width:300;
-  height:100%;
-  margin:10;
+.content {
+  width: 25%;
+  height: 100%;
+  border-right: outset 2px white;
+  border-left: outset 2px white;
+}
+
+.content:active {
+  border-right: inset 2px white;
+  border-left: inset 2px white;
 }
 
 a {
+  display: block;
+  padding: 2vh 0;
   text-decoration: none;
   text-align: center;
   color: white;
-  height: 75%;
-  font-size: 3vh;
+  font-size: 4vh;
 }
 
 #siteAnchor {
