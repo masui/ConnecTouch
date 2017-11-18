@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4em;
+  overflow: hidden;
+}
+
+header{
+  width: 100vw;
+  height: 10vh;
+  position: fixed;
+  background-image: linear-gradient(120deg, #155799, #159957);
+  z-index: 100;
+  top: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  width: 25%;
+  height: 100%;
+  border-right: outset 2px white;
+  border-left: outset 2px white;
+}
+
+.content:active {
+  border-right: inset 2px white;
+  border-left: inset 2px white;
+}
+
+a {
+  display: block;
+  padding: 2vh 0;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  font-size: 4vh;
+}
+
+#siteAnchor {
+  height: 10vh;
+}
+
+#page {
+  width: 100vw;
+  height: 90vh;
+  border: none;
+}
+
+#mapAnchor {
+  height: 90vh;
+  top: 10vh;
+}
+
+#mapCanvas { 
+  float:left;
+  width:70%;
+  height:100%;
+}
+
+#routeCanvas {
+  background-color: white;
+  overflow: auto;
+  float:right;
+  width:30%;
+  height:100%;
+}

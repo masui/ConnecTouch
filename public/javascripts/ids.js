@@ -34,3 +34,25 @@ const akibaSight   = 秋葉原サイネージ;
 const fujisawaFood = 湘南台サイネージ; 
 const sendaiRelax  = 緑水亭ポスタ;
 const niigataAmuse = 鎌倉券売機;
+
+// ORF用
+var data = [
+  { 
+    name : "緑水亭",
+    id : "0022cf46f69b", //緑水亭ポスタ
+    url : "http://www.ryokusuitei.co.jp/",
+    location : {lat: 38.22, lng: 140.72}
+  },
+  { 
+    name : "湘南なぎさパーク",
+    id : "f45c89bfd495",
+    url : "http://www.s-n-p.jp/enoshima/",
+    location : {lat: 35.30, lng: 139.481001}
+  },
+  { 
+    name : "ヨドバシAkiba",
+    id : "0023dfdfe588", //緑水亭ポスタ
+    url : "http://www.yodobashi-akiba.com/",
+    location : {lat: 35.69, lng: 139.77}
+  }
+];
