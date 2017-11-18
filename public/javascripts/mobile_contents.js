@@ -7,11 +7,11 @@ const list = {
   n0114c302c014bf0f: {name:'佐藤',icon:'sato.png'},
   n0114c302c014bf0f: {name:'及川',icon:'oyokawa.png'},
   n0139001cb197e6f5: {name:'伊藤',icon:'ito.png'},
-  p0023dfdfe588: '秋葉原サイネージ',
-  pf45c89bfd495: '湘南台サイネージ',
-  pa45e60e40c05: '増井Mac',
-  p0022cf46f69b: '緑水亭ポスタ',
-  pb827ebc26e60: '鎌倉券売機'
+  p0023dfdfe588: {name:'秋葉原サイネージ'},
+  pf45c89bfd495: {name:'湘南台サイネージ'},
+  pa45e60e40c05: {name:'増井Mac'},
+  p0022cf46f69b: {name:'緑水亭ポスタ'},
+  pb827ebc26e60: {name:'鎌倉券売機'}
 }
 
 
@@ -47,7 +47,7 @@ $(function() {
           let _time = calTime(data[index].time);
           let _name = list['n' + data[index].link[1]]['name'];
           let _icon = list['n' + data[index].link[1]]['icon'];
-          let _place = list['p' + data[index].link[0]];
+          let _place = list['p' + data[index].link[0]]['name'];
 
           // data[index].link[1] = list['n' + data[index].link[1]];
           // data[index].link[0] = list['p' + data[index].link[0]];
