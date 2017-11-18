@@ -25,7 +25,7 @@ $(function() {
   //console.log(param);
 
   const linkURL = 'http://connectouch.org/links?id=' + ids;
-  $('#title > .text').append(list[param]);
+  $('#title > .text').append(list[param]['name']);
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
