@@ -1,7 +1,7 @@
 const list = {
   n0110041085168d11: 'masui.png',
   n01147302560fd305: 'masui.png',
-  n011401147f10c10a: 'hayalawa.png',
+  n011401147f10c10a: 'hayakawa.png',
   n0114b34d2414b148: 'hayakawa.png',
   n0114b34d0316e228: 'stake.png',
   n0114c302c014bf0f: 'sato.png',
@@ -18,7 +18,7 @@ const list = {
 $(function() {
   //$('.place').hide();
 
-  const linkURL = 'http://connectouch.org/links';
+  const linkURL = 'http://connectouch.org/links?limit=50';
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
