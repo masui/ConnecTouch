@@ -76,7 +76,7 @@ body {
   height: 150px;
 }
 
-.place,.data{
+.place,.place_data,.name_data{
   line-height: 150px;
   width :auto;
   font-size: 50px;
@@ -84,10 +84,18 @@ body {
   padding: 0px;
 }
 
-.data{
+.name_data{
   position: absolute;
   left: 15%;
 }
+
+.place_data{
+  position: absolute;
+  left: 5%;
+}
+
+
+
 .time {
   position: absolute;
   line-height: 150px;
@@ -100,4 +108,9 @@ body {
 
 .icon {
   position: absolute;
+  height: 110px;
+  top: 0;
+  bottom: 0;
+  left: 1%;
+  margin: auto;
 }
