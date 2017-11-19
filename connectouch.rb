@@ -104,7 +104,8 @@ end
 
 get '/links' do
   id = params['id']
-  limit = params['limit'] || 10
+  limit = params['limit'].to_i
+  limit = 10 if limit == 0
   if id.to_s == ''
     db['link'].find.sort(:time, :desc).to_a[0...limit].to_json # 降順
   else
