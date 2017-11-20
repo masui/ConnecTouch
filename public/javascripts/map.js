@@ -4,6 +4,7 @@ var syonandai = {lat: 35.396324, lng: 139.466522}
 var kamakura = {lat: 35.319001, lng:139.550733}
 var midtown = {lat: 35.665876, lng: 139.731000}
 
+// 関数呼び出しの順番どうにかしたい
 function initMap() {
   var directionsDisplay = new google.maps.DirectionsRenderer;
   var directionsService = new google.maps.DirectionsService;
@@ -15,13 +16,12 @@ function initMap() {
   directionsDisplay.setPanel(document.getElementById('routeCanvas'));
 
   var onClickHandler = function() {
-    readLinks(directionsService, directionsDisplay);
+    getUid(directionsService, directionsDisplay);
   };
   document.getElementById('reco').addEventListener('click', onClickHandler);
 }
 
 function calcAndDispRoute(end, directionsService, directionsDisplay) {
-
   var request = {
     origin: midtown,
     destination: end,
