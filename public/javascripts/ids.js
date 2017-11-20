@@ -41,18 +41,18 @@ var data = [
     name : "緑水亭",
     id : "0022cf46f69b", //緑水亭ポスタ
     url : "http://www.ryokusuitei.co.jp/",
-    location : {lat: 38.22, lng: 140.72}
+    location : {lat: 38.220972,	lng: 140.728089}
   },
   { 
-    name : "湘南なぎさパーク",
+    name : "湘南なぎさパーク", // 江ノ島関係
     id : "f45c89bfd495",
     url : "http://www.s-n-p.jp/enoshima/",
-    location : {lat: 35.30, lng: 139.481001}
+    location : {lat: 35.301279, lng:	139.481001}
   },
   { 
-    name : "ヨドバシAkiba",
-    id : "0023dfdfe588", //緑水亭ポスタ
-    url : "http://www.yodobashi-akiba.com/",
-    location : {lat: 35.69, lng: 139.77}
+    name : "秋葉原UDX",
+    id : "0023dfdfe588", //秋葉原サイネージ
+    url : "http://udx.jp/",
+    location : {lat: 35.700243, lng: 139.772507}
   }
 ];
