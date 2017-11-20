@@ -4,10 +4,12 @@ var syonandai = {lat: 35.396324, lng: 139.466522}
 var kamakura = {lat: 35.319001, lng:139.550733}
 var midtown = {lat: 35.665876, lng: 139.731000}
 
+var directionsDisplay, directionsService;
+
 // 関数呼び出しの順番どうにかしたい
 function initMap() {
-  var directionsDisplay = new google.maps.DirectionsRenderer;
-  var directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsService = new google.maps.DirectionsService;
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 7,
     center: midtown
@@ -16,12 +18,12 @@ function initMap() {
   directionsDisplay.setPanel(document.getElementById('routeCanvas'));
 
   var onClickHandler = function() {
-    getUid(directionsService, directionsDisplay);
+    getUid();
   };
   document.getElementById('reco').addEventListener('click', onClickHandler);
 }
 
-function calcAndDispRoute(end, directionsService, directionsDisplay) {
+function calcAndDispRoute(end) {
   var request = {
     origin: midtown,
     destination: end,

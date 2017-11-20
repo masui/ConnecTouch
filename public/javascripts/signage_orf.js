@@ -10,19 +10,19 @@ let GET_UID = 'http://connectouch.org/links?id=' + ownId
 let GET_RID = 'http://connectouch.org/links?id=' + currentUid
 
 // サイネージにタッチしたユーザーのIDを特定
-function getUid(directionsService, directionsDisplay) {
+function getUid() {
   $.getJSON(
     GET_UID,
     null,
     function(data, status){
       // 現在のユーザーを特定
       currentUid = data[0].link[1]
-      getRid(directionsService, directionsDisplay)
+      getRid()
   })
 };
 
 // 現在のユーザーが最後にタッチしたリーダーのIDを特定
-function getRid(directionsService, directionsDisplay) {
+function getRid() {
   $.getJSON(
     GET_RID,
     null,
@@ -30,12 +30,12 @@ function getRid(directionsService, directionsDisplay) {
       latestRid = data[0].link[0]
       console.log(`currentUid = ${currentUid}`)
       console.log(`latestRid = ${latestRid}`)
-      changeSrc(directionsService, directionsDisplay)
+      changeSrc()
   })
 }
 
 // latestRidに合わせて表示するページを選定
-function changeSrc(directionsService, directionsDisplay){
+function changeSrc(){
   var info = data.filter(function(elem, index){
     if (elem.id == latestRid) return true;
   });
@@ -50,7 +50,7 @@ function changeSrc(directionsService, directionsDisplay){
 
   $('#page').attr('src', src)
 
-  calcAndDispRoute(endPoint, directionsService, directionsDisplay)
+  calcAndDispRoute(endPoint)
 }
 
 // TOPボタン
