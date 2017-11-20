@@ -10,6 +10,8 @@ import binascii
 import requests
 from datetime import datetime
 from uuid import getnode as get_mac
+from subprocess import Popen
+import os
 
 readerId = "%012x" % get_mac() # リーダに接続されたマシンのMACアドレス(48ビット整数)のHex値
 
@@ -29,6 +31,8 @@ def connected(tag):
     date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     print("|%s| readerId: %s nfcId: %s" % (date, readerId, nfcId))
     
+    Popen('/home/pi/ConnecTouch/Reader/led.sh',shell=True)
+
     if readerId == "a45e60e40c05": # 増井のパソコンの場合URLも通知
         request = "http://connectouch.org/addlink/%s/%s?url=%s" % (readerId, nfcId, lasturl())
     else:
