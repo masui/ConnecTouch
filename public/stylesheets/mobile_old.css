@@ -1,0 +1,122 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  /*line-height: 1.5;*/
+  color: #606c71;
+  background-color: #f0f0f0
+}
+
+#header {
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+  height: 150px;
+  color: #fff;
+  font-size: 50px;
+  text-align: center;
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #159957);
+}
+
+.project-name {
+  margin: 0px;
+  line-height: 150px;
+}
+
+.title {
+  display: block;
+  width: auto;
+  margin: 2px 0px 0px 0px;
+  padding: 0px;
+  height: 125px;
+  color: #fff;
+  background-color: #969694;
+  /*background-image: linear-gradient(120deg, #969696, #646464);*/
+  position: relative;
+}
+
+.text, .back {
+  line-height: 125px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.data {
+  position: absolute;
+  top: 30%;
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  left: 15px;
+  height: 125px;
+  text-decoration: none;
+}
+
+.time {
+  position: absolute;
+  font-size: 30px;
+  top: 30%;
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  right: 15px;
+  height: 125px;
+  text-decoration: none;
+}
+
+.data_set {
+  width: auto;
+  height: 125px;
+  margin: 1px 0px 0px 0px;
+  padding: 0px;
+  background-color: #fdfdfd;
+  position: relative;
+}
+
+.place, .name {
+  display: none;
+  width: auto;
+  margin: 1px 0px 0px 0px;
+  padding: 0px;
+  height: 125px;
+  background-color: #fdfdfd;
+  position: relative;
+}
+
+.place{}
+
+
+.test {
+  position: absolute;
+  top: 30%;
+  display: block;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  height: 125px;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:visited{
+  color: #fff;
+}
+
+
+
+#namelist, #palcelist {
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+}
+
+#datalist {
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  width: auto;
+  position: relative;
+}

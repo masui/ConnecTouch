@@ -1,0 +1,116 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  /*line-height: 1.5;*/
+  color: #606c71;
+  /*background-color: #f0f0f0;*/
+  background-color: #e5e5e5;
+}
+
+#header {
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+  height: 175px;
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #159957);
+}
+
+.project-name {
+  margin:0px;
+  color: #fff;
+  font-size: 60px;
+  line-height: 175px;
+  text-align: center;
+}
+
+.menu {
+  display: block;
+  width: auto;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  height: 150px;
+  background-color: #969694;
+  position: relative;
+}
+
+.text{
+  display: block;
+  color: #fff;
+  font-size: 60px;
+  margin:0px;
+  line-height: 150px;
+  text-align: center;
+}
+
+
+
+
+
+
+.timeline {
+  margin: 0px;
+  padding: 0px;
+}
+
+.column {
+  display: block;
+  width: auto;
+  margin: 2px 0px 0px 0px;
+  padding: 0px;
+  height: 150px;
+  background-color: #fdfdfd;
+  position: relative;
+}
+
+.link{
+  position: absolute;
+  display: block;
+  width :85%;
+  margin: 0px;
+  padding: 0px;
+  left: 15%;
+  height: 150px;
+}
+
+.place,.place_data,.name_data{
+  line-height: 150px;
+  width :auto;
+  font-size: 50px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.name_data{
+  position: absolute;
+  left: 15%;
+}
+
+.place_data{
+  position: absolute;
+  left: 5%;
+}
+
+
+
+.time {
+  position: absolute;
+  line-height: 150px;
+  font-size: 40px;
+  margin: 0px;
+  padding: 0px;
+  right: 5%;
+
+}
+
+.icon {
+  position: absolute;
+  height: 110px;
+  top: 0;
+  bottom: 0;
+  left: 1%;
+  margin: auto;
+}
