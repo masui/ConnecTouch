@@ -1,0 +1,11 @@
+[Unit]
+Description = ConnecTouch reader daemon
+
+[Service]
+ExecStart = /usr/bin/python /home/pi/ConnecTouch/Reader/reader.py
+User = root
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
