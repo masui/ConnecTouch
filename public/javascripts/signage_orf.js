@@ -1,18 +1,18 @@
 //
 // RFIDのIDなどは javascripts/ids.js で定義している
 //
-var ownId = signage // 自身を定義
+var ownId = ORFサイネージ // 自身を定義
 var currentUid = "" // 現在のユーザーのIDを保持
 var latestRid  = "" // 最後にタッチしたリーダーのIDを保持
 
 const linkURL = 'http://connectouch.org/links';
-let GET_UID = 'http://connectouch.org/links?id=' + ownId
-let GET_RID = 'http://connectouch.org/links?id=' + currentUid
+const GET_UID = 'http://connectouch.org/links?id='
+const GET_RID = 'http://connectouch.org/links?id='
 
 // サイネージにタッチしたユーザーのIDを特定
 function getUid() {
   $.getJSON(
-    GET_UID,
+    GET_UID + ownId,
     null,
     function(data, status){
       // 現在のユーザーを特定
@@ -24,10 +24,20 @@ function getUid() {
 // 現在のユーザーが最後にタッチしたリーダーのIDを特定
 function getRid() {
   $.getJSON(
-    GET_RID,
+    GET_RID + currentUid,
     null,
     function(data, status){
-      latestRid = data[0].link[0]
+        var new_link;
+        for(let v of data) {
+            if(v.link[0] == ownId) continue;
+            new_link = v.link[0];
+            break;
+        }
+        if(new_link == latestRid) {
+            console.log('same rid');
+            return;
+        }
+        latestRid = new_link;
       console.log(`currentUid = ${currentUid}`)
       console.log(`latestRid = ${latestRid}`)
       changeSrc()
@@ -36,19 +46,21 @@ function getRid() {
 
 // latestRidに合わせて表示するページを選定
 function changeSrc(){
+    console.log(data);
   var info = data.filter(function(elem, index){
     if (elem.id == latestRid) return true;
   });
 
-  name = info[0].name
-  endPoint = info[0].location
-  src = info[0].url
+  if(info.length == 0) return false;
+  name = info[0].name;
+  endPoint = info[0].location;
+  src = info[0].url;
 
-  console.log(name)
-  console.log(endPoint)
-  console.log(src)
+  console.log(name);
+  console.log(endPoint);
+  console.log(src);
 
-  $('#page').attr('src', src)
+  $('#page').attr('src', src);
 
   calcAndDispRoute(endPoint)
 }
@@ -66,3 +78,9 @@ $(function() {
   
   returnTop();
 });
+
+// ポーリング処理
+var interval_sec = 1;
+setInterval(function() {
+    getUid();
+}, interval_sec * 1000);

@@ -21,6 +21,7 @@ const 湘南台サイネージ = 'f45c89bfd495'; // 早川Mac
 const 増井Mac =          'a45e60e40c05'; // 増井MBP
 const 緑水亭ポスタ =     '0022cf46f69b'; // DeltaPi
 const 鎌倉券売機 =       'b827ebc26e60'; // SatakePi
+const ORFサイネージ = 'b827ebc26e60'; // 鎌倉券売機Piを代用
       
 const 増井SFCカード =    '01147302560fd305';
 const 佐竹学生証 =       '0114b34d0316e228';
