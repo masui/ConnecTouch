@@ -14,7 +14,7 @@ body {
   width: auto;
   margin: 0px;
   padding: 0px;
-  height: 175px;
+  height: 75px;
   background-color: #159957;
   background-image: linear-gradient(120deg, #155799, #159957);
 }
@@ -22,34 +22,13 @@ body {
 .project-name {
   margin:0px;
   color: #fff;
-  font-size: 60px;
-  line-height: 175px;
-  text-align: center;
-}
-
-.menu {
-  display: block;
-  width: auto;
-  margin: 0px 0px 0px 0px;
-  padding: 0px;
-  height: 40px;
-  background-color: #969694;
-  position: relative;
-}
-
-.text{
-  display: block;
-  color: #fff;
-  font-size: 60px;
-  margin:0px;
-  line-height: 40px;
+  font-size: 30px;
+  line-height: 75px;
   text-align: center;
 }
 
 
-
-
-
+/*共通部分*/
 
 .timeline {
   margin: 0px;
@@ -59,13 +38,41 @@ body {
 .column {
   display: block;
   width: auto;
-  margin: 2px 0px 0px 0px;
+  margin: 1px 0px 0px 0px;
   padding: 0px;
-  height: 40px;
+  height: 60px;
   background-color: #fdfdfd;
   position: relative;
 }
 
+.time {
+  position: absolute;
+  line-height: 60px;
+  font-size: 15px;
+  margin: 0px;
+  padding: 0px;
+  right: 5%;
+}
+
+.icon {
+  position: absolute;
+  height: 40px;
+  top: 0;
+  bottom: 0;
+  left: 1%;
+  margin: auto;
+}
+
+.place,.place_data,.name_data{
+  line-height: 60px;
+  width :auto;
+  font-size: 25px;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/*homeのタイムライン*/
 .link{
   position: absolute;
   display: block;
@@ -76,13 +83,8 @@ body {
   height: 40px;
 }
 
-.place,.place_data,.name_data{
-  line-height: 40px;
-  width :auto;
-  font-size: 50px;
-  margin: 0px;
-  padding: 0px;
-}
+
+/*詳細ページ*/
 
 .name_data{
   position: absolute;
@@ -94,23 +96,21 @@ body {
   left: 5%;
 }
 
-
-
-.time {
-  position: absolute;
-  line-height: 40px;
-  font-size: 40px;
-  margin: 0px;
+.menu {
+  display: block;
+  width: auto;
+  margin: 0px 0px 0px 0px;
   padding: 0px;
-  right: 5%;
-
+  height: 60px;
+  background-color: #969694;
+  position: relative;
 }
 
-.icon {
-  position: absolute;
-  height: 110px;
-  top: 0;
-  bottom: 0;
-  left: 1%;
-  margin: auto;
+.text{
+  display: block;
+  color: #fff;
+  font-size: 30px;
+  margin:0px;
+  line-height: 60px;
+  text-align: center;
 }
