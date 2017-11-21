@@ -2,18 +2,20 @@
 // 増井のSFCカードをGoldfishにタッチしたときの行動
 //
 
-
-
 const idtable = [
     ['0023dfdfe588', '秋葉原サイネージ'],
     ['0022cf46f69b', 'Delta-Pi'],
     ['f45c89bfd495', '湘南台サイネージ'],
     ['a45e60e40c05', '増井Mac'],
     ['0022cf46f69b', '緑水亭ポスタ'],
+    ['satakepi',     'Satake-Pi'],
     ['b827ebc26e60', 'Satake-Pi'],
     ['b827ebc26e60', '(鎌倉券売機)'],
-    ['b827eb535d6f', 'Hikaru-Pi'],
+    ['hikarupi1',    'Hikaru-Pi1'],
+    ['b827eb535d6f', 'Hikaru-Pi1'],
+    ['hikarupi2',    'Hikaru-Pi2'],
     ['b827ebad490f', 'Hikaru-Pi2'],
+    ['hikarupi3',    'Hikaru-Pi3'],
     ['b827eb641d6b', 'Hikaru-Pi3'],
     ['e52d967345eb', 'ヒカルのMac?'],
     ['1b96fcdca562', 'Saji-Pi'],
