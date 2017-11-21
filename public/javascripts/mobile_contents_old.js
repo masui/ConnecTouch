@@ -7,7 +7,6 @@ const list = {
   n0114c302c014bf0f: {name:'佐藤',icon:'sato.png'},
   n0114c302c014bf0f: {name:'及川',icon:'oyokawa.png'},
   n0139001cb197e6f5: {name:'伊藤',icon:'ito.png'},
-  n010101123d0c1c11: {name:'左治木',icon:'saji.png'},
   p0023dfdfe588: {name:'秋葉原サイネージ'},
   pf45c89bfd495: {name:'湘南台サイネージ'},
   pa45e60e40c05: {name:'増井Mac'},
@@ -26,7 +25,7 @@ $(function() {
   const type = window.location.search.substring(1, 2);
   //console.log(param);
 
-  const linkURL = 'http://connectouch.org/links?limit=10000';
+  const linkURL = 'http://connectouch.org/links?id=' + ids;
   $('#title > .text').append(list[param]['name']);
   $.getJSON(
     linkURL, //第一引数にURL
@@ -45,34 +44,20 @@ $(function() {
         //console.log('lastReaderID : ' + data[lastIndex].link[0])
 
         for (index in data) {
+
           let _time = calTime(data[index].time);
-          if (data[index].link[1]==ids) {//人名一致
-            if (list['p' + data[index].link[0]]!=undefined) {
-              let _place = list['p' + data[index].link[0]]['name'];
+          if (list['n' + data[index].link[1]]!=undefined && list['p' + data[index].link[0]]!=undefined) {
+            let _name = list['n' + data[index].link[1]]['name'];
+            let _icon = list['n' + data[index].link[1]]['icon'];
+            let _place = list['p' + data[index].link[0]]['name'];
+            if (type == 'n') {
               $('#timeline').append('<div class="column" data-param="p'+ data[index].link[0]+'"><span class="place_data">' + _place + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
-            }
-          }else if (data[index].link[0]==ids) {//場所名一致
-            if (list['n' + data[index].link[1]]!=undefined) {
-              let _name = list['n' + data[index].link[1]]['name'];
-              let _icon = list['n' + data[index].link[1]]['icon'];
+            } else if (type == 'p') {
               $('#timeline').append('<div class="column" data-param="n'+ data[index].link[1]+'"><img class="icon" src="../images/user_icons/' + _icon + '" alt="" /><span class="name_data">' + _name+ '</span><span class="time">' + _time + '</span></div>');
             }
-
+          }else {
+            break;
           }
-
-
-          // if (list['n' + data[index].link[1]]!=undefined && list['p' + data[index].link[0]]!=undefined) {
-          //   let _name = list['n' + data[index].link[1]]['name'];
-          //   let _icon = list['n' + data[index].link[1]]['icon'];
-          //   let _place = list['p' + data[index].link[0]]['name'];
-          //   if (type == 'n') {
-          //     $('#timeline').append('<div class="column" data-param="p'+ data[index].link[0]+'"><span class="place_data">' + _place + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
-          //   } else if (type == 'p') {
-          //     $('#timeline').append('<div class="column" data-param="n'+ data[index].link[1]+'"><img class="icon" src="../images/user_icons/' + _icon + '" alt="" /><span class="name_data">' + _name+ '</span><span class="time">' + _time + '</span></div>');
-          //   }
-          // }else {
-          //   break;
-          // }
 
           // data[index].link[1] = list['n' + data[index].link[1]];
           // data[index].link[0] = list['p' + data[index].link[0]];

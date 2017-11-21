@@ -3,22 +3,30 @@ const list = {
   n01147302560fd305: 'masui.png',
   n011401147f10c10a: 'hayakawa.png',
   n0114b34d2414b148: 'hayakawa.png',
-  n0114b34d0316e228: 'stake.png',
-  n0114c302c014bf0f: 'sato.png',
-  n0114c302c014bf0f: 'oyokawa.png',
+  n0114b34d0316e228: 'satake.png',
+  n0114c302c014bf0f: 'satou.png',
+  n010101121512e002: 'satou.png',
+  n01010112a718242f: 'oyokawa.png',
   n0139001cb197e6f5: 'ito.png',
+  n010101123d0c1c11: 'saji.png',
   p0023dfdfe588: '秋葉原サイネージ',
   pf45c89bfd495: '湘南台サイネージ',
   pa45e60e40c05: '増井Mac',
   p0022cf46f69b: '緑水亭ポスタ',
-  pb827ebc26e60: '鎌倉券売機'
+  pb827ebc26e60: '鎌倉券売機',
+  pdeltapi: '',
+  psatakepi: '',
+  psajipi: '',
+  phikarupi1: 'なぞなぞ１',
+  phikarupi2: '',
+  phikarupi3: ''
 }
 
 
 $(function() {
   //$('.place').hide();
 
-  const linkURL = 'http://connectouch.org/links?limit=50';
+  const linkURL = 'http://connectouch.org/links?limit=10000';
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
@@ -44,7 +52,10 @@ $(function() {
           // } else if (type == 'p') {
           //   $('#datalist').append('<div class="data_set"><span class="data">' + data[index].link[1] + '</span><span class="time">' + calTime(data[index].time) + '</span></div>');
           // }
-          $('.timeline').append('<div class="column"><img class="icon" src="images/user_icons/'+ _icon +'" alt="icon" data-param="'+ data[index].link[1]+'" /><div class="link" data-param="'+ data[index].link[0]+'"><span class="place">'+_place +'</span><span class="time">'+_time +'</span></div></div>');
+          if (_place != undefined && _icon != undefined) {
+            $('.timeline').append('<div class="column"><img class="icon" src="images/user_icons/'+ _icon +'" alt="icon" data-param="'+ data[index].link[1]+'" /><div class="link" data-param="'+ data[index].link[0]+'"><span class="place">'+_place +'</span><span class="time">'+_time +'</span></div></div>');
+          }
+
         }
 
       } else {
