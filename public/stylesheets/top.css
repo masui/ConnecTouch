@@ -50,7 +50,7 @@ div.sukima {
   right:0;
   bottom:0;
   left:0;
-  background:url("bg-led.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+  background:url("../images/bg-led.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
   background-size:4px 4px;
   z-index:10;
 }
