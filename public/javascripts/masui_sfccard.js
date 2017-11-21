@@ -58,7 +58,7 @@ $(function() {
 	var link = data[i].link;
 	var reader = link[0];
 	if(reader == 増井SFCカード) reader = link[1];
-	$('<li>').text(`${datestr(data[i].time)} - ${id2name(reader)}`).appendTo(ul);
+	$('<li>').text(`${datestr(data[i].time)} ⇒ ${id2name(reader)}`).appendTo(ul);
     }
     
     var data = getHistory('',100);
@@ -78,9 +78,9 @@ $(function() {
 	    readername = id2name(link[0]);
 	}
 	if(cardname){
-	    var s = `${cardname} が ${readername} にタッチ`;
+	    var s = `${cardname} ⇒ ${readername}`;
 	    if(! visited[s]){
-		$('<li>').text(`${datestr(data[i].time)} - ${s}`).appendTo(ul);
+		$('<li>').text(`${datestr(data[i].time)} ${s}`).appendTo(ul);
 		visited[s] = true;
 	    }
 	}
