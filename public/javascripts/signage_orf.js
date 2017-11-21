@@ -63,7 +63,7 @@ function changeSrc(){
 
   setInterval(function() {
     returnTop();
-}, 10 * 1000);
+}, 20 * 1000);
 }
 
 // TOP遷移
