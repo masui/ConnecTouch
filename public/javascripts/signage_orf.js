@@ -6,13 +6,12 @@ var currentUid = "" // 現在のユーザーのIDを保持
 var latestRid  = "" // 最後にタッチしたリーダーのIDを保持
 
 const linkURL = 'http://connectouch.org/links';
-const GET_UID = 'http://connectouch.org/links?id='
-const GET_RID = 'http://connectouch.org/links?id='
+const GET_ID = 'http://connectouch.org/links?id='
 
 // サイネージにタッチしたユーザーのIDを特定
 function getUid() {
   $.getJSON(
-    GET_UID + ownId,
+    GET_ID + ownId,
     null,
     function(data, status){
       // 現在のユーザーを特定
@@ -24,7 +23,7 @@ function getUid() {
 // 現在のユーザーが最後にタッチしたリーダーのIDを特定
 function getRid() {
   $.getJSON(
-    GET_RID + currentUid,
+    GET_ID + currentUid,
     null,
     function(data, status){
         var new_link;
@@ -62,20 +61,18 @@ function changeSrc(){
 
   $('#page').attr('src', src);
 
-  calcAndDispRoute(endPoint)
+  setInterval(function() {
+    returnTop();
+}, 10 * 1000);
 }
 
-// TOPボタン
+// TOP遷移
 function returnTop() {
-  $('#page').attr('src',"railmap.html");
+  $('#page').attr('src',"top.html");
 }
 
 // iframの更新処理
 $(function() {
-  $('#page').attr('marginwidth',0);
-  $('#top').on('click',returnTop);
-  //$('#reco').on('click',readLinks);
-  
   returnTop();
 });
 

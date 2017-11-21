@@ -12,6 +12,13 @@ body {
   overflow: hidden;
 }
 
+#page {
+  height: 100vh;
+  width: 100vw;
+  border: none;
+}
+
+/*
 header{
   width: 100vw;
   height: 10vh;
@@ -76,4 +83,4 @@ a {
   float:right;
   width:30%;
   height:100%;
-}
+}*/
