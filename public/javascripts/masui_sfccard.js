@@ -60,7 +60,9 @@ $(function() {
 	if(reader == 増井SFCカード) reader = link[1];
 	$('<li>').text(`${datestr(data[i].time)} - ${id2name(reader)}`).appendTo(ul);
     }
+    
     var data = getHistory('',100);
+    var visited = {};
     $('<h1>').text('増井の友達カード履歴').appendTo($('body'));
     ul = $('<ul>').appendTo($('body'));
     for(var i=0; i<data.length; i++){
@@ -76,7 +78,11 @@ $(function() {
 	    readername = id2name(link[0]);
 	}
 	if(cardname){
-	    $('<li>').text(`${datestr(data[i].time)} - ${cardname}が${readername}にタッチ`).appendTo(ul);
+	    var s = `${cardname} が ${readername} にタッチ`;
+	    if(! visited[s]){
+		$('<li>').text(`${datestr(data[i].time)} - ${s}`).appendTo(ul);
+		visited[s] = true;
+	    }
 	}
     }
 });
