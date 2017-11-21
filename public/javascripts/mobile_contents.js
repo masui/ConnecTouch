@@ -13,7 +13,12 @@ const list = {
   pa45e60e40c05: {name:'増井Mac'},
   p0022cf46f69b: {name:'緑水亭ポスタ'},
   pb827ebc26e60: {name:'鎌倉券売機'},
-  phikarupi1:{name:'なぞなぞ1'}
+  pdeltapi: {name:''},
+  psatakepi: {name:'サイネージ'},
+  psajipi: {name:''},
+  phikarupi1:{name:'なぞなぞ1'},
+  phikarupi2: {name:''},
+  phikarupi3: {name:''}
 }
 
 

@@ -15,7 +15,7 @@ const list = {
   p0022cf46f69b: '緑水亭ポスタ',
   pb827ebc26e60: '鎌倉券売機',
   pdeltapi: '',
-  psatakepi: '',
+  psatakepi: 'サイネージ',
   psajipi: '',
   phikarupi1: 'なぞなぞ１',
   phikarupi2: '',
