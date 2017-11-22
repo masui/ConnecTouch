@@ -18,8 +18,8 @@ const list = {
   psatakepi: 'サイネージ',
   psajipi: '',
   phikarupi1: 'なぞなぞ１',
-  phikarupi2: '',
-  phikarupi3: ''
+  phikarupi2: 'なぞなぞ2',
+  phikarupi3: 'なぞなぞ3'
 }
 
 
