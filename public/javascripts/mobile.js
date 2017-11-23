@@ -26,7 +26,7 @@ const list = {
 $(function() {
   //$('.place').hide();
 
-  const linkURL = 'http://connectouch.org/links?limit=10000';
+  const linkURL = 'http://connectouch.org/links?limit=1300';
   $.getJSON(
     linkURL, //第一引数にURL
     null, //第二引数に送信するデータ(今回は受信だけなので'null'指定)
