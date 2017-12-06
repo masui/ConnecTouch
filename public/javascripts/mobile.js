@@ -17,9 +17,9 @@ const list = {
   pdeltapi: '',
   psatakepi: 'サイネージ',
   psajipi: '',
-  phikarupi1: 'なぞなぞ１',
-  phikarupi2: 'なぞなぞ2',
-  phikarupi3: 'なぞなぞ3'
+  phikarupi1: '緑水亭ポスター',
+  phikarupi2: '秋葉原ポスター',
+  phikarupi3: 'ポスター3'
 }
 
 
