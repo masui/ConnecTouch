@@ -11,7 +11,7 @@ const list = {
   n010101123d0c1c11: 'saji.png',
   p0023dfdfe588: '秋葉原サイネージ',
   pf45c89bfd495: '湘南台サイネージ',
-  pa45e60e40c05: '増井Mac',
+  pa45e60e40c05: 'サイネージ',//増井先生のMBP
   p0022cf46f69b: '緑水亭ポスタ',
   pb827ebc26e60: '鎌倉券売機',
   pdeltapi: '',
