@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>connectouch</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>RACK_ENV</key>
+      <string>production</string>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/bin/rackup</string>
+      <string>config.ru</string>
+      <string>-p</string>
+      <string>7000</string>
+      <string>--env</string>
+      <string>production</string>
+    </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/var/log/connectouch.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/connectouch.log</string>
+    <key>UserName</key>
+    <string>masui</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/masui/ConnecTouch</string>
+  </dict>
+</plist>
