@@ -12,8 +12,9 @@ from datetime import datetime
 from uuid import getnode as get_mac
 from subprocess import Popen
 import os
+import commands
 
-readerId = "%012x" % get_mac() # リーダに接続されたマシンのMACアドレス(48ビット整数)のHex値
+readerId = commands.getoutput("ip a show wlan0 | grep 'inet ' | cut -f6 -d ' '") # リーダに接続されたマシンのIPアドレス
 
 def lasturl():
     LOGFILE = '/Users/masui/Sites/rememberurl.log'
@@ -33,10 +34,11 @@ def connected(tag):
     
     Popen('/home/pi/ConnecTouch/Reader/led.sh',shell=True)
 
-    if readerId == "a45e60e40c05": # 増井のパソコンの場合URLも通知
-        request = "http://connectouch.org/addlink/%s/%s?url=%s" % (readerId, nfcId, lasturl())
-    else:
-        request = "http://connectouch.org/addlink/%s/%s" % (readerId, nfcId)
+    #if readerId == "a45e60e40c05": # 増井のパソコンの場合URLも通知
+    #    request = "http://connectouch.org/addlink/%s/%s?url=%s" % (readerId, nfcId, lasturl())
+    #else:
+    #    request = "http://connectouch.org/addlink/%s/%s" % (readerId, nfcId)
+    request = "http://connectouch.org/addlink/%s/%s?url=%s" % (readerId, nfcId, lasturl)
 
     try:
         res = requests.get(request)
@@ -57,5 +59,3 @@ if clf:
             'on-release': released,
     }):
         pass
-    
-        
