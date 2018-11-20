@@ -7,8 +7,9 @@ import nfc
 import binascii
 from datetime import datetime
 from uuid import getnode as get_mac
+import commands
 
-readerId = "%012x" % get_mac() # リーダに接続されたマシンのMACアドレス(48ビット整数)のHex値
+readerId = commands.getoutput("ip a show wlan0 | grep 'inet ' | cut -f6 -d ' '") # リーダに接続されたマシンのIPアドレス
 
 def startup(targets):
     print 'waiting for NFC tag ...'
@@ -31,5 +32,3 @@ if clf:
             'on-release': released,
     }):
         pass
-    
-        
