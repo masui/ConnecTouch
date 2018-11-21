@@ -1,3 +1,5 @@
+ORFのときの設定
+
 ■ MACアドレス
 
  増井 MacBookPro   a45e60e40c05
@@ -14,3 +16,10 @@
  早川学生証     0114b34d2414b148
  佐竹学生証     0114b34d0316e228
 
+
+* MongoDBセットアップ
+ sudo mkdir /var/lib/mongodb
+ sudo touch /var/log/mongodb.log
+ sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb.log
+
+ sudo service mongodb start

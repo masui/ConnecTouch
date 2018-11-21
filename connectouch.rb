@@ -24,17 +24,20 @@ db = client.database
 
 get '/read/:id' do |id|
   data = db['node'].find(:id => id)
-  data.collect { |document|
-    document
-  }.to_json
+  data.to_a.to_json
+  
+  #data.collect { |document|
+  #  document
+  #}.to_json
 end
 
 get '/read' do
   id = params[:id]
   data = db['node'].find(:id => id)
-  data.collect { |document|
-    document
-  }.to_json
+  data.to_a.to_json
+  #data.collect { |document|
+  #  document
+  #}.to_json
 end
 
 get '/write/:id' do |id| # /write/abc?url=xyz, etc.
@@ -106,9 +109,12 @@ get '/links' do
   limit = params['limit'].to_i
   limit = 10 if limit == 0
   if id.to_s == ''
-    db['link'].find.sort(:time, :desc).to_a[0...limit].to_json # 降順
+    db['link'].find().to_a[0...limit].to_json # 降順
+    #db['link'].find().to_a.sort().to_a[0...limit].to_json # 降順
+    #db['link'].find().to_a[0...limit].to_json # 降順
   else
-    db['link'].find.sort(:time, :desc).find_all { |e|
+    # db['link'].find().sort(:time, :desc).find_all { |e|
+    db['link'].find().find_all { |e|
       e['link'][0] == id || e['link'][1] == id
     }.to_a[0...limit].to_json
   end
