@@ -26,20 +26,26 @@ ORFのときの設定
  じゃなくて
  brew services start mongodb
 
-* nginx setup
+* nginxが自動起動されるようにする
   cp nginx.plist /Library/LaunchDaemons/
+
+  手動で再起動のときは以下のようにするといい
   sudo launchctl unload /Library/LaunchDaemons/nginx.plist 
   sudo launchctl load /Library/LaunchDaemons/nginx.plist 
   sudo launchctl stop /Library/LaunchDaemons/nginx.plist 
   sudo launchctl start /Library/LaunchDaemons/nginx.plist 
 
-  cp nginx.conf /usr/local/etc/nginx/nginx.conf
-  cp connectouch.conf /usr/local/etc/nginx/apps/
+  sudo cp nginx.conf /usr/local/etc/nginx
 
-* connectouch setup
+* Sinatraのconnectouchサーバが自動起動するようにする
   cp connectouch.plist /Library/LaunchDaemons/
+
+  手動で再起動のときは以下のようにする
   sudo launchctl unload /Library/LaunchDaemons/connectouch.plist
   sudo launchctl load /Library/LaunchDaemons/connectouch.plist
   sudo launchctl stop /Library/LaunchDaemons/connectouch.plist
   sudo launchctl start /Library/LaunchDaemons/connectouch.plist
+
+  nginxのconfに登録しておく
+  sudo cp connectouch.conf /usr/local/etc/nginx/apps/
 
