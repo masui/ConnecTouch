@@ -14,7 +14,7 @@
     <key>ProgramArguments</key>
     <array>
       <string>/usr/local/bin/rackup</string>
-      <string>config.ru</string>
+      <string>/Users/masuilab/ConnecTouch/config.ru</string>
       <string>-p</string>
       <string>7000</string>
       <string>--env</string>
@@ -25,12 +25,12 @@
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/var/log/connectouch.log</string>
+    <string>/Users/masuilab/ConnecTouch/connectouch.log</string>
     <key>StandardErrorPath</key>
-    <string>/var/log/connectouch.log</string>
+    <string>/Users/masuilab/ConnecTouch/connectouch.log</string>
     <key>UserName</key>
-    <string>masui</string>
+    <string>masuilab</string>
     <key>WorkingDirectory</key>
-    <string>/Users/masui/ConnecTouch</string>
+    <string>/Users/masuilab/ConnecTouch</string>
   </dict>
 </plist>

@@ -23,3 +23,21 @@ ORFのときの設定
  sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb.log
 
  sudo service mongodb start
+
+* nginx setup
+  cp nginx.plist /Library/LaunchDaemons/
+  sudo launchctl unload /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl load /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl stop /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl start /Library/LaunchDaemons/nginx.plist 
+
+  cp nginx.conf /usr/local/etc/nginx/nginx.conf
+  cp connectouch.conf /usr/local/etc/nginx/apps/
+
+* connectouch setup
+  cp connectouch.plist /Library/LaunchDaemons/
+  sudo launchctl unload /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl load /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl stop /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl start /Library/LaunchDaemons/connectouch.plist
+
