@@ -109,12 +109,9 @@ get '/links' do
   limit = params['limit'].to_i
   limit = 100 if limit == 0
   if id.to_s == ''
-    db['link'].find().to_a[0...limit].to_json # 降順
-    #db['link'].find().to_a.sort().to_a[0...limit].to_json # 降順
-    #db['link'].find().to_a[0...limit].to_json # 降順
+    db['link'].find().sort({time:-1}).to_a[0...limit].to_json # 降順
   else
-    # db['link'].find().sort(:time, :desc).find_all { |e|
-    db['link'].find().find_all { |e|
+    db['link'].find().sort({time:-1}).find_all { |e|
       e['link'][0] == id || e['link'][1] == id
     }.to_a[0...limit].to_json
   end
