@@ -23,6 +23,8 @@ ORFのときの設定
  sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb.log
 
  sudo service mongodb start
+ じゃなくて
+ brew services start mongodb
 
 * nginx setup
   cp nginx.plist /Library/LaunchDaemons/
