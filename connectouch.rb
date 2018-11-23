@@ -9,11 +9,8 @@
 # > db.link.find()
 
 require 'sinatra'
-# require 'sinatra/cross_origin'
 require 'mongo'
 require 'json'
-
-# enable :cross_origin
 
 # いろいろMongoの仕様が変わった?
 # connection = Mongo::Connection.new('localhost', 27017)
@@ -25,19 +22,12 @@ db = client.database
 get '/read/:id' do |id|
   data = db['node'].find(:id => id)
   data.to_a.to_json
-  
-  #data.collect { |document|
-  #  document
-  #}.to_json
 end
 
 get '/read' do
   id = params[:id]
   data = db['node'].find(:id => id)
   data.to_a.to_json
-  #data.collect { |document|
-  #  document
-  #}.to_json
 end
 
 get '/write/:id' do |id| # /write/abc?url=xyz, etc.
@@ -117,13 +107,36 @@ get '/links' do
   end
 end
 
-#get '/' do
-#  redirect 'https://masui.github.io/ConnecTouch/'
-#end
-#
-#get '/index.html' do
-#  redirect 'https://masui.github.io/ConnecTouch/'
-#end
+get '/register' do
+  @id = params['id'].to_s
+  @email = params['email'].to_s
+  @keywords = params['keywords'].to_s.split(/\s*,\s*/)
+  @secrets = params['secrets'].to_s.split(/\s*,\s*/)
+
+  if @email == '' && @keywords.length == 0 && @secrets.length == 0
+    data = db['info'].find(:id => @id).first
+    if data
+      p data
+      @email = data['email']
+      @keywords = data['keywords']
+      @secrets = data['secrets']
+    end
+  end
+
+  if db['info'].find(:id => @id).to_a.length > 0
+    db['info'].delete_many(:id => @id)
+  end
+  
+  data = {
+    id: @id,
+    email: @email,
+    keywords: @keywords,
+    secrets: @secrets
+  }
+  db['info'].insert_one data
+  
+  erb :register
+end
 
 error do
   "Error!"

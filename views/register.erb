@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ConnecTouch登録</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    <style type="text/css">
+      a:link { color: #0000f0 ; }
+      a:visited { color: #0000f0 ; }
+      a {
+      text-decoration: none;
+      }
+
+      body {
+        background-color: #ffd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Suica 「<%= @id %>」を登録</h1>
+
+    <blockquote>
+      <form action="/register">
+	email: <input name='email' type="text" value="<%= @email %>" />
+	<br/>
+	合言葉: <input name='secrets' type="text" value="<%= @secrets.join(", ") %>" />
+	<br/>
+	キーワード: <input name='keywords' type="text" value="<%= @keywords.join(", ") %>" />
+	<br/>
+	<p/>
+	<input type="submit" value="登録" />
+	<input type="hidden" name="id" value="<%= @id %>" />
+      </form>
+    </blockquote>
+  </body>
+</html>
