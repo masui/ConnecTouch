@@ -6,8 +6,8 @@
     <script type="text/javascript">
       $(function() {
         if('<%= @desc %>' == '') $('#desc').attr('placeholder','山田のSuica');
-      if('<%= @email %>' == '') $('#email').attr('placeholder','yamada@example.com');
-        if('<%= @secrets.length %>' == 0) $('#secrets').attr('placeholder','yamada_secret, aaa');
+        if('<%= @email %>' == '') $('#email').attr('placeholder','yamada@example.com');
+        if('<%= @secrets.length %>' == 0) $('#secrets').attr('placeholder','yamada4173, quicksilver');
         if('<%= @keywords.length %>' == 0) $('#keywords').attr('placeholder','秋葉原, ジャズ');
       });
     </script>
@@ -26,20 +26,15 @@
         grid-template-columns: 140px 1fr;
       }
       .item {
-      font-size:14pt;
-      padding:2pt;
-      /* margin: 3pt; */
-      /*
-        grid-row: 1;
-      grid-column: 1;
-      */
+        font-size:14pt;
+        padding:2pt;
       }
       input {
         font-size:14pt;
         width:400;
       }
       input::placeholder {
-        color: #e0e0e0;
+        color: #ddd;
       }
       .title {
         text-align:right;
