@@ -46,12 +46,16 @@ sudo mkdir /var/lib/mongodb
 
 * 自動起動
   /etc/systemd/system/ に connectouch.service を置く
+  sudo systemctl enable connectouch.service　で自動起動を登録
+  sudo systemctl start connectouch.serviceでプログラムを起動
+  systemctl status connectouch.serviceで生死を確認できる
 
 * IP割り当て
 
   /etc/dhcpcd.conf を手書き
   static id_address=192.168.0.201 など
   マシンごとに変える
+  ※変更した場合はsudo rebootで再起動する必要あり
   
 
 
