@@ -35,18 +35,24 @@ sudo mkdir /var/lib/mongodb
   sudo cp connectouch.conf /usr/local/etc/nginx/apps/
 
 ■ RasPi設定
+  [https://scrapbox.io/masuilab/ラズパイ環境構築2018%2F11%2F22]
 
 * ユーザ: pi
   パスワード: いつもの
 
+* /home/pi/ConnecTouch/Reader に設定ファイルのサンプルあり
+  connectouch.service
+  dhcpcd.sample.conf
+
 * 自動起動
-  ???
+  /etc/systemd/system/ に connectouch.service を置く
 
 * IP割り当て
 
-  dhcp設定 ???
-
-* /home/pi/ConnecTouch/Reader 
+  /etc/dhcpcd.conf を手書き
+  static id_address=192.168.0.201 など
+  マシンごとに変える
+  
 
 
 -----------------------------------------------------------------
