@@ -20,9 +20,7 @@ def connected(tag):
     nfcId = binascii.hexlify(tag.identifier)
     print(nfcId)
     
-    #commands.getoutput("open http://example.com/{0}".format(nfcId))
-    print("open file:///Users/masui/ConnecTouch/Register/register.html?id={0}".format(nfcId))
-    commands.getoutput("open http://localhost/register.html\?id={0}".format(nfcId))
+    commands.getoutput("open http://192.168.0.200/register.html\?id={0}".format(nfcId))
 
     return id
     
