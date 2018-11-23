@@ -15,23 +15,63 @@
       body {
         background-color: #ffd;
       }
+      .container {
+        display:grid;
+        grid-template-columns: 140px 1fr;
+      }
+      .item {
+      font-size:14pt;
+      padding:2pt;
+      /* margin: 3pt; */
+      /*
+        grid-row: 1;
+      grid-column: 1;
+      */
+      }
+      input {
+        font-size:14pt;
+        width:400;
+      }
+      .title {
+        text-align:right;
+      }
+      .buttonxx {
+        display: inline-block;
+        width: 150px;
+        height: 200px;
+        font-size:40px;
+      }
+      .button {
+        display       : inline-block;
+        width: 100;
+        border-radius : 8%;          /* 角丸       */
+        font-size     : 14pt;        /* 文字サイズ */
+        text-align    : center;      /* 文字位置   */
+        cursor        : pointer;     /* カーソル   */
+        padding       : 12px 12px;   /* 余白       */
+        background    : #000090;     /* 背景色     */
+        color         : #ffffff;     /* 文字色     */
+        line-height   : 1em;         /* 1行の高さ  */
+        transition    : .3s;         /* なめらか変化 */
+      }
+
     </style>
   </head>
   <body>
     <h1>Suica 「<%= @id %>」を登録</h1>
 
-    <blockquote>
-      <form action="/register">
-	email: <input name='email' type="text" value="<%= @email %>" />
-	<br/>
-	合言葉: <input name='secrets' type="text" value="<%= @secrets.join(", ") %>" />
-	<br/>
-	キーワード: <input name='keywords' type="text" value="<%= @keywords.join(", ") %>" />
-	<br/>
-	<p/>
-	<input type="submit" value="登録" />
-	<input type="hidden" name="id" value="<%= @id %>" />
-      </form>
-    </blockquote>
+    <form action="/register">
+      <div class="container">
+	<div class="item"><div class="title">email:</div></div>
+	<div class="item"><input name='email' type="text" value="<%= @email %>" /></div>
+	<div class="item"><div class="title">合言葉:</div></div>
+	<div class="item"><input name='secrets' type="text" value="<%= @secrets.join(", ") %>" /></div>
+	<div class="item"><div class="title">キーワード:</div></div>
+	<div class="item"><input name='keywords' type="text" value="<%= @keywords.join(", ") %>" /></div>
+      </div>
+      <p/>
+      <input type="submit" class="button" value="登録" />
+      <input type="hidden" name="id" value="<%= @id %>" />
+    </form>
   </body>
 </html>
