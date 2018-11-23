@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon ./dist/server/app.js -watch src/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d dist",
     "watch": "babel src -w -d  dist "
@@ -12,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.1.6",
     "@babel/cli": "^7.1.5",
-    "@babel/preset-env": "^7.1.6"
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "gyazo-api": "^0.3.1",
+    "nodemon": "^1.18.6"
   }
 }
