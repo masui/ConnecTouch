@@ -2,8 +2,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>ConnecTouch登録</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="/javascripts/jquery.min.js"></script>
     <script type="text/javascript">
+      $(function() {
+        if('<%= @desc %>' == '') $('#desc').attr('placeholder','山田のSuica');
+      if('<%= @email %>' == '') $('#email').attr('placeholder','yamada@example.com');
+        if('<%= @secrets.length %>' == 0) $('#secrets').attr('placeholder','yamada_secret, aaa');
+        if('<%= @keywords.length %>' == 0) $('#keywords').attr('placeholder','秋葉原, ジャズ');
+      });
     </script>
     <style type="text/css">
       a:link { color: #0000f0 ; }
@@ -13,7 +19,7 @@
       }
 
       body {
-        background-color: #ffd;
+        background-color: #99ffa3;
       }
       .container {
         display:grid;
@@ -32,6 +38,9 @@
         font-size:14pt;
         width:400;
       }
+      input::placeholder {
+        color: #e0e0e0;
+      }
       .title {
         text-align:right;
       }
@@ -49,7 +58,7 @@
         text-align    : center;      /* 文字位置   */
         cursor        : pointer;     /* カーソル   */
         padding       : 12px 12px;   /* 余白       */
-        background    : #000090;     /* 背景色     */
+        background    : #d74ae4;     /* 背景色     */
         color         : #ffffff;     /* 文字色     */
         line-height   : 1em;         /* 1行の高さ  */
         transition    : .3s;         /* なめらか変化 */
@@ -58,20 +67,25 @@
     </style>
   </head>
   <body>
-    <h1>Suica 「<%= @id %>」を登録</h1>
+    <h1>Suica情報登録</h1>
 
     <form action="/register">
       <div class="container">
+	<div class="item"><div class="title">ID:</div></div>
+	<div class="item"><b><%= @id %></b></div>
+	<div class="item"><div class="title">説明:</div></div>
+	<div class="item"><input id='desc' name='desc' type="text" value="<%= @desc %>" /></div>
 	<div class="item"><div class="title">email:</div></div>
-	<div class="item"><input name='email' type="text" value="<%= @email %>" /></div>
+	<div class="item"><input id='email' name='email' type="text" value="<%= @email %>" /></div>
 	<div class="item"><div class="title">合言葉:</div></div>
-	<div class="item"><input name='secrets' type="text" value="<%= @secrets.join(", ") %>" /></div>
+	<div class="item"><input id='secrets' name='secrets' type="text" value="<%= @secrets.join(", ") %>" /></div>
 	<div class="item"><div class="title">キーワード:</div></div>
-	<div class="item"><input name='keywords' type="text" value="<%= @keywords.join(", ") %>" /></div>
+	<div class="item"><input id='keywords' name='keywords' type="text" value="<%= @keywords.join(", ") %>" /></div>
       </div>
       <p/>
       <input type="submit" class="button" value="登録" />
       <input type="hidden" name="id" value="<%= @id %>" />
+      <input type="hidden" name="register" value=true />
     </form>
   </body>
 </html>

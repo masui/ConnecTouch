@@ -109,14 +109,18 @@ end
 
 get '/register' do
   @id = params['id'].to_s
+  @desc = params['desc'].to_s
   @email = params['email'].to_s
   @keywords = params['keywords'].to_s.split(/\s*,\s*/)
   @secrets = params['secrets'].to_s.split(/\s*,\s*/)
+  @register = params['register']
 
-  if @email == '' && @keywords.length == 0 && @secrets.length == 0
+  # if @desc == '' && @email == '' && @keywords.length == 0 && @secrets.length == 0
+  unless @register
     data = db['info'].find(:id => @id).first
     if data
       p data
+      @desc = data['desc']
       @email = data['email']
       @keywords = data['keywords']
       @secrets = data['secrets']
@@ -129,10 +133,13 @@ get '/register' do
   
   data = {
     id: @id,
+    desc: @desc,
     email: @email,
     keywords: @keywords,
     secrets: @secrets
   }
+  puts "======"
+  p data
   db['info'].insert_one data
   
   erb :register
