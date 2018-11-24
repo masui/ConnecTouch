@@ -154,11 +154,7 @@ get '/register' do
   erb :register
 end
 
-get '/mail' do
-  to = params['to'].to_s
-  subject = params['subject'].to_s
-  body = params['body'].to_s
-
+def sendmail(to,subject,body)
   mail = Mail.new do
     from     'connectouch.jre@gmail.com'
     to       to
@@ -171,7 +167,7 @@ get '/mail' do
     :port                  => 587,
     :domain                => 'gmail.com',
     :user_name             => 'connectouch.jre',
-    :password              => 'rwgdvflajrjqqmrr',
+    :password              => 'rwgdvflajrjqqmrr', # GMailの「アプリパスワード」
     :authentication        => :plain,
     :enable_starttls_auto  => true
   }
@@ -179,6 +175,20 @@ get '/mail' do
   mail.charset = 'utf-8'
   mail.delivery_method(:smtp, options)
   mail.deliver
+end
+
+get '/mail' do
+  to = params['to'].to_s
+  subject = params['subject'].to_s
+  body = params['body'].to_s
+  sendmail(to,subject,body)
+end
+  
+post '/mail' do
+  to = params['to'].to_s
+  subject = params['subject'].to_s
+  body = params['body'].to_s
+  sendmail(to,subject,body)
 end
   
   
