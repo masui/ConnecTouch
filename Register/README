@@ -1,3 +1,0 @@
-brew install libusb
-sudo pip install nfcpy
-sudo pip install requests

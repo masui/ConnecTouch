@@ -2,7 +2,9 @@
 #
 # NFCを認識したら登録画面を開く
 #
-# pip install nfcpy
+# brew install libusb
+# sudo pip install nfcpy
+# sudo pip install requests
 #
 
 import nfc
