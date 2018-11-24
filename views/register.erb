@@ -2,14 +2,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>ConnecTouch登録</title>
-    <script src="/javascripts/jquery.min.js"></script>
+    <!--<script src="/javascripts/jquery.min.js"></script> -->
     <script type="text/javascript">
-      $(function() {
-        if('<%= @desc %>' == '') $('#desc').attr('placeholder','山田のSuica');
-        if('<%= @email %>' == '') $('#email').attr('placeholder','yamada@example.com');
-        if('<%= @secrets.length %>' == 0) $('#secrets').attr('placeholder','yamada4173, quicksilver');
-        if('<%= @keywords.length %>' == 0) $('#keywords').attr('placeholder','秋葉原, ジャズ');
-      });
     </script>
     <style type="text/css">
       a:link { color: #0000f0 ; }
@@ -69,13 +63,13 @@
 	<div class="item"><div class="title">ID:</div></div>
 	<div class="item"><b><%= @id %></b></div>
 	<div class="item"><div class="title">説明:</div></div>
-	<div class="item"><input id='desc' name='desc' type="text" value="<%= @desc %>" /></div>
+	<div class="item"><input id='desc' name='desc' type="text" value="<%= @desc %>" placeholder="aaa"/></div>
 	<div class="item"><div class="title">email:</div></div>
-	<div class="item"><input id='email' name='email' type="text" value="<%= @email %>" /></div>
+	<div class="item"><input id='email' name='email' type="text" value="<%= @email %>" placeholder='山田のSuica' /></div>
 	<div class="item"><div class="title">合言葉:</div></div>
-	<div class="item"><input id='secrets' name='secrets' type="text" value="<%= @secrets.join(", ") %>" /></div>
+	<div class="item"><input id='secrets' name='secrets' type="text" value="<%= @secrets.join(", ") %>" placeholder='yamada4173, quicksilver' /></div>
 	<div class="item"><div class="title">キーワード:</div></div>
-	<div class="item"><input id='keywords' name='keywords' type="text" value="<%= @keywords.join(", ") %>" /></div>
+	<div class="item"><input id='keywords' name='keywords' type="text" value="<%= @keywords.join(", ") %>" placeholder='秋葉原, ジャズ' /></div>
       </div>
       <p/>
       <input type="submit" class="button" value="登録" />
