@@ -26,6 +26,19 @@ get '/read' do
   data.to_a.to_json
 end
 
+get '/delete/:id' do |id|
+  db['info'].delete_many(:id => id)
+  ''
+end
+
+get '/delete' do
+  id = params[:id]
+  if id
+    db['info'].delete_many(:id => id)
+  end
+  ''
+end
+
 get '/write/:id' do |id| # /write/abc?url=xyz, etc.
   data = params.clone
   data.delete('splat')
