@@ -182,6 +182,7 @@ get '/mail' do
   subject = params['subject'].to_s
   body = params['body'].to_s
   sendmail(to,subject,body)
+  ''
 end
   
 post '/mail' do
@@ -189,8 +190,8 @@ post '/mail' do
   subject = params['subject'].to_s
   body = params['body'].to_s
   sendmail(to,subject,body)
+  ''
 end
-  
   
 error do
   "Error!"

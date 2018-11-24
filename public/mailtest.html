@@ -11,6 +11,9 @@
 	  to = $('#to').val();
 	  subject = $('#subject').val();
 	  body = $('#body').val();
+	  mailsend(to,subject,body);
+      }
+      function mailsend(to,subject,body){
 	  $.ajax({
 	      type: "POST",
 	      url: "/mail",
@@ -19,7 +22,6 @@
 		  subject: subject,
 		  body: body
 	      },
-	      //data: `to=${to}&subject=${subject}&body=${body}`,
 	      success: function(msg){
 		  alert( "Data sent " + msg);
 	      }
