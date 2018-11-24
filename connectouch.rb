@@ -12,6 +12,8 @@ require 'sinatra'
 require 'mongo'
 require 'json'
 
+require 'mail'
+
 client = Mongo::Client.new('mongodb://localhost:27017/connectouch')
 db = client.database
 
@@ -152,6 +154,34 @@ get '/register' do
   erb :register
 end
 
+get '/mail' do
+  to = params['to'].to_s
+  subject = params['subject'].to_s
+  body = params['body'].to_s
+
+  mail = Mail.new do
+    from     'connectouch.jre@gmail.com'
+    to       to
+    subject  subject
+    body     body
+  end
+
+  options = {
+    :address               => 'smtp.gmail.com',
+    :port                  => 587,
+    :domain                => 'gmail.com',
+    :user_name             => 'connectouch.jre',
+    :password              => 'rwgdvflajrjqqmrr',
+    :authentication        => :plain,
+    :enable_starttls_auto  => true
+  }
+
+  mail.charset = 'utf-8'
+  mail.delivery_method(:smtp, options)
+  mail.deliver
+end
+  
+  
 error do
   "Error!"
 end
