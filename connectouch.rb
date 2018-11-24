@@ -31,10 +31,10 @@ get '/write/:id' do |id| # /write/abc?url=xyz, etc.
   data.delete('splat')
   data.delete('captures')
   if data != {} then
-    db['node'].delete_many(:id => id) # remove all items with id
-    db['node'].insert_one(data)
+    db['info'].delete_many(:id => id) # remove all items with id
+    db['info'].insert_one(data)
   end
-  data.to_json
+  data.to_a.to_json
 end
 
 get '/write' do # /write?id=abc&url=xyz, etc.
@@ -42,14 +42,14 @@ get '/write' do # /write?id=abc&url=xyz, etc.
   data.delete('splat')
   data.delete('captures')
   if data['id'] then
-    db['node'].delete_many(:id => data['id']) # remove all items with id
-    db['node'].insert_one(data)
+    db['info'].delete_many(:id => data['id']) # remove all items with id
+    db['info'].insert_one(data)
   end
-  data.to_json
+  data.to_a.to_json
 end
 
-get '/nodes' do
-  db['node'].find().to_a.to_json
+get '/info' do
+  db['info'].find().to_a.to_json
 end
 
 get '/addlink/:id1/:id2' do |id1,id2|
