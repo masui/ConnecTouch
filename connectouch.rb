@@ -12,21 +12,17 @@ require 'sinatra'
 require 'mongo'
 require 'json'
 
-# いろいろMongoの仕様が変わった?
-# connection = Mongo::Connection.new('localhost', 27017)
-# db = connection.db('connectouch')
-
 client = Mongo::Client.new('mongodb://localhost:27017/connectouch')
 db = client.database
 
 get '/read/:id' do |id|
-  data = db['node'].find(:id => id)
+  data = db['info'].find(:id => id)
   data.to_a.to_json
 end
 
 get '/read' do
   id = params[:id]
-  data = db['node'].find(:id => id)
+  data = db['info'].find(:id => id)
   data.to_a.to_json
 end
 
