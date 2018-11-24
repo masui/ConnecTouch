@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # -*- ruby -*-
 #
-# ConnecTouch
+# ConnecTouchサーバ
 #
 # % mongo
 # > use connectouch
@@ -147,8 +147,6 @@ get '/register' do
     keywords: @keywords,
     secrets: @secrets
   }
-  puts "======"
-  p data
   db['info'].insert_one data
   
   erb :register
