@@ -1,28 +1,8 @@
 <html>
   <head>
     <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/mail"></script>
     <script>
-      function send(){
-	  to = $('#to').val();
-	  subject = $('#subject').val();
-	  body = $('#body').val();
-	  mailsend(to,subject,body);
-      }
-      function mailsend(to,subject,body){
-	  $.ajax({
-	      type: "POST",
-	      url: "http://192.168.0.200/mail",
-	      data: {
-		  to: to,
-		  subject: subject,
-		  body: body
-	      },
-	      success: function(msg){
-		  alert( "Data sent " + msg);
-	      }
-	  });
-      }
-
 
  /*5番ラズパイのLinksを監視する*/
  const observeReaderId = "192.168.0.205";
