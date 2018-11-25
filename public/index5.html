@@ -1,6 +1,29 @@
 <html>
   <head>
-<script>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script>
+      function send(){
+	  to = $('#to').val();
+	  subject = $('#subject').val();
+	  body = $('#body').val();
+	  mailsend(to,subject,body);
+      }
+      function mailsend(to,subject,body){
+	  $.ajax({
+	      type: "POST",
+	      url: "http://192.168.0.200/mail",
+	      data: {
+		  to: to,
+		  subject: subject,
+		  body: body
+	      },
+	      success: function(msg){
+		  alert( "Data sent " + msg);
+	      }
+	  });
+      }
+
+
  /*5番ラズパイのLinksを監視する*/
  const observeReaderId = "192.168.0.205";
  /*取得したlinksをローカルの配列として保持する*/
@@ -27,6 +50,7 @@
     
     if (diffLinks.length != 0) {
        console.log(`新しいタッチイベントが${diffLinks.length}件発生しました!`)
+      mailsend('masui@pitecan.com','new touch','new touch event')
     }
     
     /*例えば自分が1番の場合は監視するフィルタも作れる*/
