@@ -1,3 +1,6 @@
+//
+// サーバのメール送付APIでメールを送る
+//
 function mailsend(to,subject,body){
     $.ajax({
 	type: "POST",
@@ -8,7 +11,7 @@ function mailsend(to,subject,body){
 	    body: body
 	},
 	success: function(msg){
-	    // alert( "Data sent " + msg);
+	    console.log(`Message sent to ${to}`);
 	}
     });
 }
