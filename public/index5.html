@@ -30,7 +30,6 @@
     
     if (diffLinks.length != 0) {
        console.log(`新しいタッチイベントが${diffLinks.length}件発生しました!`)
-      mailsend('masui@pitecan.com','5番にタッチ',`${link.link[1]}が私にタッチした!`)
     }
     
     /*例えば自分が1番の場合は監視するフィルタも作れる*/
@@ -38,6 +37,7 @@
       /*リーダーIDが自分のIDと一致する場合*/
        if (link.link[0] === observeReaderId) {
           console.log(`${link.link[1]}が私にタッチした!`)
+          mailsend('masui@pitecan.com','5番にタッチ',`${link.link[1]}が私にタッチした!`)
        }
     })
  }
