@@ -3,72 +3,186 @@
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/mail.js"></script>
     <script>
-
-        /*5番ラズパイのLinksを監視する*/
-        const observeReaderId = "192.168.0.205";
-        /*取得したlinksをローカルの配列として保持する*/
-        let storedLinks = [];
-
-        /*ローカルのlinksと毎秒取得する新鮮なlinksとの差分をとる関数*/
-        const getDiff = (oldLinks, newLinks) => {
-            /*newLinksにあってoldLinksに無いものは新しいものとする*/
-            /*あるかないかの確認はmongoDBのレコードIdを元に行う*/
-            const oldIdArray = oldLinks.map(link => link._id.$oid);
-
-            /*レコードIdを元に存在しているかを真偽値で返す関数*/
-            const isContained = (link) => {
-                return oldIdArray.includes(link._id.$oid);
-            };
-
-            /*newLinksにあってoldLinksに無いものだけを集めた配列を作る*/
-            const diffLinks = newLinks.reduce((prev, curr) => {
-                if (!isContained(curr)) {
-                    prev.push(curr)
-                }
-                return prev
-            }, []);
-
-            if (diffLinks.length != 0 || diffLinks.length < 3) {
-                console.log(`新しいタッチイベントが${diffLinks.length}件発生しました!`);
-                /*新規に読み込むと昔のlinkも読み込んでしまうので制限する*/
-                /*例えば自分が1番の場合は監視するフィルタも作れる*/
-                diffLinks.forEach(link => {
-                    /*リーダーIDが自分のIDと一致する場合*/
-                    if (link.link[0] === observeReaderId) {
-                        console.log(`${link.link[1]}が私にタッチした!`);
-                        mailsend('hykwtakumin@gmail.com', '5番にタッチ', `${link.link[1]}が私にタッチした!`)
-                    };
-                })
-            }
-        };
-
-        /*ポーリングする関数*/
-        const pollingLinks = async () => {
-            /*192.168.0.200/linksから紐付いたlinksを取得する*/
-            /*Paramsにidを追加しない場合全てのリーダーのイベントを取得できる*/
-            const endPointUrl = `http://192.168.0.200/links?id=${observeReaderId}&limit=100`;
-            try {
-                const request = await fetch(endPointUrl);
-                /*新しい配列*/
-                const loadedLinks = await request.json();
-                /*新しく追加されたLinksを求める*/
-                getDiff(storedLinks, loadedLinks);
-                /*ローカルの配列を新しい配列に上書きする*/
-                storedLinks = loadedLinks;
-            } catch (error) {
-                console.log(error)
-            }
-        };
-
         window.onload = () => {
+            /*5番ラズパイのLinksを監視する*/
+            const observeReaderId = "192.168.0.205";
+            /*取得したlinksをローカルの配列として保持する*/
+            let storedLinks = [];
+            /*ポーリングする関数*/
+            const pollingLinks = async () => {
+                /*192.168.0.200/linksから紐付いたlinksを取得する*/
+                /*Paramsにidを追加しない場合全てのリーダーのイベントを取得できる*/
+                const endPointUrl = `http://192.168.0.200/links?id=${observeReaderId}&limit=100`;
+                try {
+                    const request = await fetch(endPointUrl);
+                    /*新しい配列*/
+                    const loadedLinks = await request.json();
+                    /*新しく追加されたLinksを求める*/
+                    getDiff(storedLinks, loadedLinks);
+                    /*ローカルの配列を新しい配列に上書きする*/
+                    storedLinks = loadedLinks;
+                } catch (error) {
+                    console.log(error)
+                }
+            };
             /*ポーリングする関数を毎秒呼び出す*/
             setInterval(() => {
                 pollingLinks();
             }, 1000);
+
+            const canvas = document.getElementById("canvas");
+            const photo = document.getElementById("photo");
+
+            const width = 960;
+            const height = 720;
+            const constraints = (window.constraints = {
+                audio: false,
+                video: true,
+            });
+
+            function handleSuccess(stream) {
+                const video = document.querySelector("video");
+                video.srcObject = stream;
+            }
+
+            function handleError(error) {
+                if (error.name === "ConstraintNotSatisfiedError") {
+                    let v = constraints.video;
+                    console.log(
+                        `The resolution ${v.width.exact}x${
+                            v.height.exact
+                            } px is not supported by your device.`
+                    );
+                } else if (error.name === "PermissionDeniedError") {
+                    console.log(
+                        "Permissions have not been granted to use your camera and " +
+                        "microphone, you need to allow the page access to your devices in " +
+                        "order for the demo to work."
+                    );
+                }
+                console.log(`getUserMedia error: ${error.name}`, error);
+            }
+
+            async function init(e) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    handleSuccess(stream);
+                    //e.target.disabled = true;
+                } catch (e) {
+                    handleError(e);
+                }
+            }
+
+            init();
+
+            const takepicture = () => {
+                const context = canvas.getContext("2d");
+                if (width && height) {
+                    canvas.width = width;
+                    canvas.height = height;
+                    context.drawImage(video, 0, 0, width, height);
+
+                    const data = canvas.toDataURL("image/png");
+                    photo.setAttribute("src", data);
+                } else {
+                    console.log("Clear Photo!");
+                }
+            };
+
+            const countDown = () => {
+                const defaultTimes = 3;
+                let times = defaultTimes;
+
+                const videoArea = document.getElementById('video');
+                const countArea = document.createElement('div');
+                countArea.id = "countArea";
+                document.body.appendChild(countArea);
+                countArea.style.width = videoArea.width;
+                countArea.style.height = videoArea.height;
+                countArea.style.left = videoArea.left;
+                countArea.style.top = videoArea.top;
+                countArea.style.zIndex = 2147483647;
+                countArea.style.backgroundColor = '#000000';
+                countArea.style.opacity = '0.7';
+                countArea.style.textAlign = 'center';
+                countArea.style.fontSize = '2em';
+                countArea.style.color = '#ffffff';
+                let timerId = setInterval(() => {
+                    times--;
+                    countArea.innerText = times.toString();
+                    if (times <= 0) {
+                        countArea.innerText = "撮影します!";
+                        clearInterval(timerId);
+                        takepicture();
+                        // countArea.remove();
+                    }
+                }, 1000);
+            };
+
+            document.querySelector("#showVideo").addEventListener("click", e => {
+                init(e);
+            });
+            document.querySelector("#takePicture").addEventListener("click", e => {
+                //takepicture();
+                countDown();
+                e.preventDefault();
+            });
+
+            /*ローカルのlinksと毎秒取得する新鮮なlinksとの差分をとる関数*/
+            const getDiff = (oldLinks, newLinks) => {
+                /*newLinksにあってoldLinksに無いものは新しいものとする*/
+                /*あるかないかの確認はmongoDBのレコードIdを元に行う*/
+                const oldIdArray = oldLinks.map(link => link._id.$oid);
+
+                /*レコードIdを元に存在しているかを真偽値で返す関数*/
+                const isContained = (link) => {
+                    return oldIdArray.includes(link._id.$oid);
+                };
+
+                /*newLinksにあってoldLinksに無いものだけを集めた配列を作る*/
+                const diffLinks = newLinks.reduce((prev, curr) => {
+                    if (!isContained(curr)) {
+                        prev.push(curr)
+                    }
+                    return prev
+                }, []);
+
+                if (diffLinks.length != 0 || diffLinks.length < 2) {
+                    console.log(`新しいタッチイベントが${diffLinks.length}件発生しました!`);
+                    /*新規に読み込むと昔のlinkも読み込んでしまうので制限する*/
+                    /*例えば自分が1番の場合は監視するフィルタも作れる*/
+                    diffLinks.forEach(link => {
+                        /*リーダーIDが自分のIDと一致する場合*/
+                        if (link.link[0] === observeReaderId) {
+                            console.log(`${link.link[1]}が私にタッチしたので撮影します`);
+                            // takepicture();
+                            countDown();
+                            // mailsend('hykwtakumin@gmail.com', '5番にタッチ', `${link.link[1]}が私にタッチした!`)
+                        }
+                    })
+                }
+            };
+
+
         };
     </script>
 </head>
 <body>
-Web page for RasPi5
+<h1>Web page for RasPi5</h1>
+<video
+        class="Rotate90"
+        id="video"
+        width="960"
+        height="720"
+        autoplay>
+</video>
+
+<button id="showVideo">Open camera</button>
+<button id="takePicture">take</button>
+<canvas id="canvas"></canvas>
+<div class="output">
+    <img id="photo" alt="The screen capture will appear in this box."/>
+</div>
+
 </body>
 </html>
