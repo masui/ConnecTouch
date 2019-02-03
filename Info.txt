@@ -1,4 +1,75 @@
-ORFのときの設定
+■ NFCカードID
+
+ 増井Suica      0110041085168d11
+ 増井SFCカード  0114b6ae80185f0e
+
+ 早川Suica      011401147f10c10a
+ 早川学生証     0114b34d2414b148
+ 佐竹学生証     0114b34d0316e228
+
+■ サーバ(MacMini)設定
+
+* MongoDBセットアップ
+
+sudo mkdir /var/lib/mongodb
+ sudo touch /var/log/mongodb.log
+ sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb.log
+
+ sudo service mongodb start
+ じゃなくて
+ brew services start mongodb
+
+* サーバでnginxが自動起動されるようにする
+  cp nginx.plist /Library/LaunchDaemons/
+
+  手動で再起動のときは以下のようにするといい
+  sudo launchctl unload /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl load /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl stop /Library/LaunchDaemons/nginx.plist 
+  sudo launchctl start /Library/LaunchDaemons/nginx.plist 
+
+* connectouchサーバ(Sinatra)が自動起動するようにする
+  cp connectouch.plist /Library/LaunchDaemons/
+
+  手動で再起動のときは以下のようにする
+  sudo launchctl unload /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl load /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl stop /Library/LaunchDaemons/connectouch.plist
+  sudo launchctl start /Library/LaunchDaemons/connectouch.plist
+  
+* nginx設定
+
+  7000番ポートでSinatraが動き、
+  sudo cp nginx.conf /usr/local/etc/nginx
+  sudo cp connectouch.conf /usr/local/etc/nginx/apps/
+
+■ RasPi設定
+  [https://scrapbox.io/masuilab/ラズパイ環境構築2018%2F11%2F22]
+
+* ユーザ: pi
+  パスワード: いつもの
+
+* /home/pi/ConnecTouch/Reader に設定ファイルのサンプルあり
+  connectouch.service
+  dhcpcd.sample.conf
+
+* 自動起動
+  /etc/systemd/system/ に connectouch.service を置く
+  sudo systemctl enable connectouch.service　で自動起動を登録
+  sudo systemctl start connectouch.serviceでプログラムを起動
+  systemctl status connectouch.serviceで生死を確認できる
+
+* IP割り当て
+
+  /etc/dhcpcd.conf を手書き
+  static id_address=192.168.0.201 など
+  マシンごとに変える
+  ※変更した場合はsudo rebootで再起動する必要あり
+  
+
+
+-----------------------------------------------------------------
+ORF2017のときの設定
 
 ■ MACアドレス
 
@@ -16,36 +87,4 @@ ORFのときの設定
  早川学生証     0114b34d2414b148
  佐竹学生証     0114b34d0316e228
 
-
-* MongoDBセットアップ
- sudo mkdir /var/lib/mongodb
- sudo touch /var/log/mongodb.log
- sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb.log
-
- sudo service mongodb start
- じゃなくて
- brew services start mongodb
-
-* nginxが自動起動されるようにする
-  cp nginx.plist /Library/LaunchDaemons/
-
-  手動で再起動のときは以下のようにするといい
-  sudo launchctl unload /Library/LaunchDaemons/nginx.plist 
-  sudo launchctl load /Library/LaunchDaemons/nginx.plist 
-  sudo launchctl stop /Library/LaunchDaemons/nginx.plist 
-  sudo launchctl start /Library/LaunchDaemons/nginx.plist 
-
-  sudo cp nginx.conf /usr/local/etc/nginx
-
-* Sinatraのconnectouchサーバが自動起動するようにする
-  cp connectouch.plist /Library/LaunchDaemons/
-
-  手動で再起動のときは以下のようにする
-  sudo launchctl unload /Library/LaunchDaemons/connectouch.plist
-  sudo launchctl load /Library/LaunchDaemons/connectouch.plist
-  sudo launchctl stop /Library/LaunchDaemons/connectouch.plist
-  sudo launchctl start /Library/LaunchDaemons/connectouch.plist
-
-  nginxのconfに登録しておく
-  sudo cp connectouch.conf /usr/local/etc/nginx/apps/
 
