@@ -19,6 +19,32 @@ canvas {
   margin-left: 700px;
 }
 
+.videoArea {
+  width: 960px;
+  height: 720px;
+  position: relative;
+}
+.countWrapper {
+  position: absolute;
+  top: 0px;
+  width: 960px;
+  height: 720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.count {
+  font-size: 200px;
+  text-shadow: 5px 5px 0px white;
+}
+
+.result {
+  width: 960px;
+  height: 720px;
+  z-index: 3;
+}
+
 button {
   height: 40px;
   margin-left: 20px;

@@ -2,6 +2,7 @@
   <head>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/mail.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <script>
       window.onload = () => {
         /*5番ラズパイのLinksを監視する*/
@@ -93,7 +94,7 @@
 
         const takepicture = () => {
           const context = canvas.getContext("2d");
-
+          const resultDom = document.getElementById("result");
           if (width && height) {
             canvas.width = width;
             canvas.height = height;
@@ -107,16 +108,23 @@
             );
             const data = canvas.toDataURL("image/png");
             savePicture(data);
-            $(".stamp").css({
-              display: "none",
-            });
-            photo.setAttribute("src", data);
+            // $(".stamp").css({
+            //   display: "none",
+            // });
+            resultDom.setAttribute("src", "./assets/white.gif");
             setTimeout(() => {
-              $(".stamp").css({
-                display: "",
-              });
-              photo.setAttribute("src", "");
-            }, 3000);
+              // $(".stamp").css({
+              //   display: "",
+              // });
+              resultDom.setAttribute("src", data);
+            }, 100);
+            
+            setTimeout(() => {
+              // $(".stamp").css({
+              //   display: "",
+              // });
+              resultDom.setAttribute("src", "");
+            }, 10000);
           } else {
             clearphoto();
           }
@@ -142,41 +150,19 @@
         const countDown = () => {
           const defaultTimes = 3;
           let times = defaultTimes;
-
-          const videoArea = document.getElementById("video");
-          const countArea = document.createElement("div");
-          countArea.id = "countArea";
-          document.body.appendChild(countArea);
-          countArea.style.width = videoArea.width;
-          countArea.style.height = videoArea.height;
-          countArea.style.left = videoArea.left;
-          countArea.style.top = videoArea.top;
-          countArea.style.zIndex = 2147483647;
-          countArea.style.backgroundColor = "#000000";
-          countArea.style.opacity = "0.7";
-          countArea.style.textAlign = "center";
-          countArea.style.fontSize = "2em";
-          countArea.style.color = "#ffffff";
+          const countDom = document.getElementById("count");
+          countDom.innerHTML = times;
           let timerId = setInterval(() => {
             times--;
-            countArea.innerText = times.toString();
+            countDom.innerHTML = times;
             if (times <= 0) {
-              countArea.innerText = "撮影します!";
+              countDom.innerHTML = "撮影します!";
               clearInterval(timerId);
+              countDom.innerHTML = "";
               takepicture();
-              // countArea.remove();
             }
           }, 1000);
         };
-
-        document.querySelector("#showVideo").addEventListener("click", e => {
-          init(e);
-        });
-        document.querySelector("#takePicture").addEventListener("click", e => {
-          //takepicture();
-          countDown();
-          e.preventDefault();
-        });
 
         /*ローカルのlinksと毎秒取得する新鮮なlinksとの差分をとる関数*/
         const getDiff = (oldLinks, newLinks) => {
@@ -219,19 +205,21 @@
 
   <body>
     <h1>Web page for RasPi5</h1>
-    <video
-      class="Rotate90"
-      id="video"
-      width="960"
-      height="720"
-      autoplay
-    ></video>
+    <div class="videoArea">
+      <video
+        class="Rotate90"
+        id="video"
+        width="960"
+        height="720"
+        autoplay
+      ></video>
+      <div class="countWrapper"><div id="count" class="count"></div></div>
+      <div class="resultWrapper">
+        <img id="result" class="result"></img>
+      </div>
 
-    <button id="showVideo">Open camera</button>
-    <button id="takePicture">take</button>
-    <canvas id="canvas"></canvas>
-    <div class="output">
-      <img id="photo" alt="The screen capture will appear in this box." />
     </div>
+
+    <canvas id="canvas"></canvas>
   </body>
 </html>
