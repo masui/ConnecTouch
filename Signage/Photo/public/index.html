@@ -5,20 +5,24 @@
     <script>
       window.onload = () => {
         /*5番ラズパイのLinksを監視する*/
-        const observeReaderId = "192.168.0.205";
+        const observeReaderId = "192.168.0.204";
         /*取得したlinksをローカルの配列として保持する*/
         let storedLinks = [];
+        const startTime = Date.now();
+        const apiMaxLength = 10;
         /*ポーリングする関数*/
         const pollingLinks = async () => {
           /*192.168.0.200/linksから紐付いたlinksを取得する*/
           /*Paramsにidを追加しない場合全てのリーダーのイベントを取得できる*/
-          const endPointUrl = `http://192.168.0.200/links?id=${observeReaderId}&limit=100`;
+          const endPointUrl = `http://192.168.0.200/links?id=${observeReaderId}&limit=${apiMaxLength}`;
           try {
             const request = await fetch(endPointUrl);
             /*新しい配列*/
             const loadedLinks = await request.json();
             /*新しく追加されたLinksを求める*/
-            getDiff(storedLinks, loadedLinks);
+            if (storedLinks.length > 0) {
+              getDiff(storedLinks, loadedLinks);
+            }
             /*ローカルの配列を新しい配列に上書きする*/
             storedLinks = loadedLinks;
           } catch (error) {
@@ -179,7 +183,6 @@
           /*newLinksにあってoldLinksに無いものは新しいものとする*/
           /*あるかないかの確認はmongoDBのレコードIdを元に行う*/
           const oldIdArray = oldLinks.map(link => link._id.$oid);
-
           /*レコードIdを元に存在しているかを真偽値で返す関数*/
           const isContained = link => {
             return oldIdArray.includes(link._id.$oid);
