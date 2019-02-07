@@ -2,6 +2,7 @@
 
 const canvas = document.getElementById("canvas");
 const photo = document.getElementById("photo");
+const video = document.querySelector("video");
 const width = 960;
 const height = 720;
 const constraints = window.constraints = {
@@ -10,7 +11,6 @@ const constraints = window.constraints = {
 };
 
 function handleSuccess(stream) {
-  const video = document.querySelector("video");
   video.srcObject = stream;
 }
 
@@ -25,33 +25,48 @@ function handleError(error) {
   console.log(`getUserMedia error: ${error.name}`, error);
 }
 
-async function init(e) {
+async function init() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     handleSuccess(stream);
-    e.target.disabled = true;
   } catch (e) {
     handleError(e);
   }
 }
 
-const takepicture = () => {
+const takepicture = async () => {
   const context = canvas.getContext("2d");
 
   if (width && height) {
     canvas.width = width;
     canvas.height = height;
-    context.drawImage(video, 0, 0, width, height);
-    const data = canvas.toDataURL("image/png");
+    await context.drawImage(video, 0, 0, width, height);
+    const data = await canvas.toDataURL("image/png");
     photo.setAttribute("src", data);
+    await savePhoto(data);
   } else {
     clearphoto();
   }
 };
 
-document.querySelector("#showVideo").addEventListener("click", e => {
-  init(e);
-});
+const savePhoto = async base64URL => {
+  $.ajax({
+    url: "http://localhost:8888/",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      img: base64URL
+    }),
+    success: data => {
+      console.log("succes", data);
+    },
+    error: data => {
+      console.log("Error: " + data);
+    }
+  });
+};
+
+init();
 document.querySelector("#takePicture").addEventListener("click", e => {
   takepicture();
   e.preventDefault();

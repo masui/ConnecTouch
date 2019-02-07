@@ -1,0 +1,30 @@
+canvas {
+  display: none;
+}
+
+.content {
+  height: 720px;
+  margin-left: 200px;
+}
+#photo {
+  position: absolute;
+}
+
+.stamp {
+  position: absolute;
+}
+#stamp1 {
+  height: 200px;
+  margin-top: 500px;
+  margin-left: 700px;
+}
+
+button {
+  height: 40px;
+  margin-left: 20px;
+}
+
+video {
+  position: absolute;
+  z-index: -1;
+}
