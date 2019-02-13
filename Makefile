@@ -1,3 +1,5 @@
+.PHONY: register
+
 server:
 	sudo rackup config.ru -p 80
 icon:
@@ -7,3 +9,9 @@ restart:
 	sudo launchctl unload /Library/LaunchDaemons/connectouch.plist
 	sudo launchctl load /Library/LaunchDaemons/connectouch.plist
 	sudo launchctl start /Library/LaunchDaemons/connectouch.plist
+
+#
+# Card registration
+#
+register:
+	python register.py

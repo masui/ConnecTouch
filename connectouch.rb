@@ -13,6 +13,11 @@ require 'mongo'
 require 'json'
 
 require 'mail'
+require 'sinatra/cross_origin'
+
+configure do
+	enable :cross_origin
+end
 
 client = Mongo::Client.new('mongodb://localhost:27017/connectouch')
 db = client.database
@@ -194,6 +199,6 @@ post '/mail' do
 end
   
 error do
-  "Error!"
+  "Error!" + env['sinatra.error'].message
 end
 
