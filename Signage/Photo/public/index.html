@@ -11,6 +11,8 @@
         let storedLinks = [];
         const startTime = Date.now();
         const apiMaxLength = 10;
+        let pictureUserId = "";
+        let nowTaking = false;
         /*ポーリングする関数*/
         const pollingLinks = async () => {
           /*192.168.0.200/linksから紐付いたlinksを取得する*/
@@ -38,8 +40,8 @@
         const canvas = document.getElementById("canvas");
         const photo = document.getElementById("photo");
 
-        const width = 960;
-        const height = 720;
+        const width = (window.innerHeight * 4) / 3;
+        const height = window.innerHeight;
         const constraints = (window.constraints = {
           audio: false,
           video: true,
@@ -107,10 +109,9 @@
               stamp1.h
             );
             const data = canvas.toDataURL("image/png");
-            savePicture(data);
-            // $(".stamp").css({
-            //   display: "none",
-            // });
+            savePicture(data, pictureUserId);
+
+            resultDom.style.display = "block";
             resultDom.setAttribute("src", "./assets/white.gif");
             setTimeout(() => {
               // $(".stamp").css({
@@ -118,25 +119,30 @@
               // });
               resultDom.setAttribute("src", data);
             }, 100);
-            
+
             setTimeout(() => {
-              // $(".stamp").css({
-              //   display: "",
-              // });
+              hideStamps();
               resultDom.setAttribute("src", "");
-            }, 10000);
+              resultDom.style.display = "none";
+              $(".titleString").css({
+                display: "block",
+              });
+              nowTaking = false;
+            }, 7000);
           } else {
             clearphoto();
           }
         };
 
-        const savePicture = base64URL => {
+        const savePicture = (base64URL, cardId) => {
+          console.log(cardId);
           $.ajax({
             url: "http://localhost:8888/",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
               img: base64URL,
+              cardId: cardId,
             }),
             success: data => {
               console.log("succes", data);
@@ -148,20 +154,47 @@
         };
 
         const countDown = () => {
-          const defaultTimes = 3;
+          nowTaking = true;
+          $(".titleString").css({
+            display: "none",
+          });
+          setStamps();
+          const defaultTimes = 5;
           let times = defaultTimes;
           const countDom = document.getElementById("count");
           countDom.innerHTML = times;
           let timerId = setInterval(() => {
             times--;
             countDom.innerHTML = times;
-            if (times <= 0) {
-              countDom.innerHTML = "撮影します!";
-              clearInterval(timerId);
+            if (times == 0) {
               countDom.innerHTML = "";
               takepicture();
+              clearInterval(timerId);
+              countDom.innerHTML = "";
+            }
+            if (times <= -1) {
             }
           }, 1000);
+        };
+
+        const setStamps = () => {
+          originalPoint = {
+            x: (window.innerWidth - (window.innerHeight * 4) / 3) / 2,
+            y: 0,
+          };
+          $("#stamp1").css({
+            left: `${originalPoint.x + stamp1.x}px`,
+            top: `${originalPoint.y + stamp1.y}px`,
+            width: `${stamp1.w}px`,
+            height: `${stamp1.h}px`,
+            display: "block",
+          });
+        };
+
+        const hideStamps = () => {
+          $("#stamp1").css({
+            display: "none",
+          });
         };
 
         /*ローカルのlinksと毎秒取得する新鮮なlinksとの差分をとる関数*/
@@ -192,8 +225,9 @@
               /*リーダーIDが自分のIDと一致する場合*/
               if (link.link[0] === observeReaderId) {
                 console.log(`${link.link[1]}が私にタッチしたので撮影します`);
+                pictureUserId = link.link[1];
                 // takepicture();
-                countDown();
+                !nowTaking && countDown();
                 // mailsend('hykwtakumin@gmail.com', '5番にタッチ', `${link.link[1]}が私にタッチした!`)
               }
             });
@@ -204,22 +238,20 @@
   </head>
 
   <body>
-    <h1>Web page for RasPi5</h1>
-    <div class="videoArea">
-      <video
-        class="Rotate90"
-        id="video"
-        width="960"
-        height="720"
-        autoplay
-      ></video>
-      <div class="countWrapper"><div id="count" class="count"></div></div>
-      <div class="resultWrapper">
-        <img id="result" class="result"></img>
-      </div>
-
+    <div class="titleWrapper">
+      <div class="titleString">タッチすると撮影!!</div>
+    </div>
+    <div class="videoWrapper">
+      <video id="video" width="960" height="720" autoplay></video>
+    </div>
+    <div class="countWrapper">
+      <div id="count" class="count"></div>
+    </div>
+    <div class="resultWrapper">
+      <img id="result" class="result" />
     </div>
 
     <canvas id="canvas"></canvas>
+    <img src="/assets/kanban.png" alt="" id="stamp1" />
   </body>
 </html>
